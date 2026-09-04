@@ -3,13 +3,13 @@
 
 import express from "express";
 
-const NODE_ENV = "production";
-const PORT = 3000;
+const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send("Hello from Express (using nodemon)!!");
+    res.send("Hello from Express (using nodemon)!");
 });
 
 app.listen(PORT, () => {

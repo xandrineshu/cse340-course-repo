@@ -1,18 +1,61 @@
 // Week 1 Assignment
 // console.log("Hello Node.js!");
 
+// Week 1 Learning Assignment: Node.js
+// import express from "express";
+
+// const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
+// const PORT = process.env.PORT || 3000;
+
+/// const app = express();
+
+// app.get("/", (req, res) => {
+//     res.send("Hello from Express (using nodemon)!");
+// });
+
+// app.listen(PORT, () => {
+//     console.log(`Server is running at http://127.0.0.1:${PORT}`);
+//     console.log(`Environment: ${NODE_ENV}`);
+// });
+
+
 import express from "express";
+
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
-app.get("/", (req, res) => {
-    res.send("Hello from Express (using nodemon)!");
+/**
+  * Configure Express middleware
+  */
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+/**
+  * Routes
+  */
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/views/home.html'));
+});
+
+app.get('/organizations', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/views/organizations.html'));
+});
+
+app.get('/projects', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/views/projects.html'));
 });
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
     console.log(`Environment: ${NODE_ENV}`);
 });
+

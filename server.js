@@ -1,7 +1,10 @@
 import express from "express";
+import dotenv from "dotenv";
 
 import { fileURLToPath } from 'url';
 import path from 'path';
+
+dotenv.config();
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
@@ -40,6 +43,12 @@ app.get('/organizations', async (req, res) => {
 app.get('/projects', async (req, res) => {
     const title = 'Service Projects';
     res.render('projects', { title });
+});
+
+// Added route for Service Project Categories
+app.get('/categories', async (req, res) => {
+    const title = 'Service Categories';
+    res.render('categories', { title });
 });
 
 app.listen(PORT, () => {

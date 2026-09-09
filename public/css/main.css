@@ -38,7 +38,7 @@ nav ul {
 nav ul li a {
     display: block;
     color: white;
-    padding: 15px 5rem;
+    padding: 15px 3rem;
     text-decoration: none;
 }
 
@@ -47,7 +47,7 @@ nav ul li a:hover {
 }
 
 
-/* General CSS and Footer */
+/* General Page Layout */
 h1 {
     color: var(--primary-color);
     margin-bottom: 2.5rem;
@@ -55,8 +55,18 @@ h1 {
     font-size: 2.5rem;
 }
 
-main, footer {
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+main {
     padding: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
 }
 
 footer {
@@ -68,87 +78,73 @@ footer {
 }
 
 
-/* HOME */
-section.intro, section.organization-info, section.project-info, section.category-info {
+/* HOME EJS */
+main p {
     text-align: center;
-    margin-bottom: 2rem;
-    background-color: #d9e1ea;
-    padding: 2rem;
-    border-radius: 20px;
+    margin-bottom: 1.5rem;
 }
 
-section.intro {
-    margin-left: 5rem;
-    margin-right: 5rem;
-}
-
-img .main-logo {
+img.main-logo {
+    display: block;
     max-width: 100%;
     height: auto;
+    margin: 2rem auto;
 }
 
 
-/* ORGANIZATIONS */
-section .organization-list {
+/* ORGANIZATIONS, PROJECTS, & CATEGORIES LISTS */
+main ul {
+    list-style-type: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 10px;
+    gap: 1.5rem;
+    padding: 0;
+    margin-top: 1.5rem;
 }
 
-section .organization-item {
-    margin: 10px;
-    padding: 10px;
+main ul li {
+    background-color: var(--card-bg);
     border: 1px solid #c3c6d3;
-    width: calc(25% - 20px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: calc(33.333% - 1.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-section .organization-item:hover {
-    border-color: 1px solid var(--primary-color);
+main ul li:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
-section .organization-item img {
-    width: 100%;
+main ul li img {
+    max-width: 100%;
     height: auto;
-}
-
-
-/* PROJECTS */
-section.project-info {
-    margin-left: 10rem;
-    margin-right: 10rem;
-}
-
-section.project-info ul, section.category-info ul {
-    text-align: left;
-    padding: 2rem;
-    margin-left: 3rem;
-}
-
-
-/* CATEGORIES */
-section.category-info {
-    margin-left: 20rem;
-    margin-right: 20rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
 }
 
 
 /* MOBILE RESPONSIVENESS */
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 700px) {
 
-    /* Stack navigation vertically and fit link padding */
+    /* Stack navigation vertically */
     nav ul {
         flex-direction: column;
     }
 
     nav ul li a {
-        padding: 5px 1rem;
+        padding: 10px 1rem;
         text-align: center;
     }
 
-    /* Scale padding and headings */
-    main,
-    footer {
+    /* Adjust page container padding */
+    main {
         padding: 1.5rem 1rem;
     }
 
@@ -157,30 +153,12 @@ section.category-info {
         margin-bottom: 1.5rem;
     }
 
-    /* Reset desktop side margins to fit smaller screens */
-    section.intro,
-    section.project-info,
-    section.category-info {
-        margin-left: 0;
-        margin-right: 0;
-        padding: 1.25rem;
-    }
-
-    /* Adjust list padding inside project and category cards */
-    section.project-info ul,
-    section.category-info ul {
-        padding: 1rem 0;
-        margin-left: 1.25rem;
-    }
-
-    /* Convert organization cards to full width */
-    section .organization-item {
+    /* Convert list items to full width on mobile */
+    main ul li {
         width: 100%;
-        margin: 5px 0;
     }
 
-    section .organization-item img {
-        width: 30%;
-        height: auto;
+    main ul li img {
+        max-width: 50%;
     }
 }

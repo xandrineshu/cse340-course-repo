@@ -21,3 +21,43 @@ VALUES
 
 
 SELECT * FROM organization;
+
+
+-- 1. Create the table with singular naming (project)
+CREATE TABLE IF NOT EXISTS public.project (
+    project_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    organization_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    location VARCHAR(150) NOT NULL,
+    project_date DATE NOT NULL,
+    CONSTRAINT fk_organization
+        FOREIGN KEY (organization_id)
+        REFERENCES public.organization(organization_id)
+        ON DELETE CASCADE
+);
+
+-- 2. Insert the sample data into public.project
+INSERT INTO public.project (organization_id, title, description, location, project_date)
+VALUES
+    (1, 'Community Garden Cleanup', 'Help clear weeds and plant seasonal vegetables.', 'City Park', '2026-10-15'),
+    (1, 'Food Pantry Sorting', 'Sort and box non-perishable food donations.', 'Main Street Center', '2026-10-22'),
+    (1, 'Winter Coat Drive', 'Collect and distribute coats to local families.', 'Community Hall', '2026-11-05'),
+    (1, 'Senior Center Tech Workshop', 'Assist seniors with smartphone and tablet basics.', 'Senior Plaza', '2026-11-12'),
+    (1, 'Neighborhood Tree Planting', 'Plant native trees along neighborhood sidewalks.', 'Oak Avenue', '2026-11-20'),
+
+    (2, 'Youth Literacy Tutoring', 'Read with elementary students after school.', 'Public Library', '2026-10-18'),
+    (2, 'After-School Homework Club', 'Provide math and reading help to middle schoolers.', 'Youth Center', '2026-10-25'),
+    (2, 'Book Drive & Distribution', 'Organize donated books for distribution.', 'Central High School', '2026-11-02'),
+    (2, 'STEM Kit Assembly', 'Assemble hands-on science kits for elementary classrooms.', 'Tech Lab', '2026-11-09'),
+    (2, 'Career Day Mentorship', 'Share career insights with graduating high schoolers.', 'Civic Center', '2026-11-16'),
+
+    (3, 'Riverbed Trash Cleanup', 'Remove debris along the riverside trail.', 'Riverside Park', '2026-10-12'),
+    (3, 'Park Bench Restoration', 'Sand and repaint wooden benches in the park.', 'Eastside Park', '2026-10-20'),
+    (3, 'Recycling Drive', 'Collect electronic waste and plastic items.', 'Recycling Depot', '2026-11-01'),
+    (3, 'Trail Maintenance Day', 'Clear overgrown brush along popular hiking trails.', 'Mountain Trailhead', '2026-11-08'),
+    (3, 'Habitat Restoration', 'Plant native species to combat erosion.', 'Greenbelt Zone', '2026-11-19');
+
+
+SELECT * FROM public.project;
+	

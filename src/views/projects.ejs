@@ -1,14 +1,35 @@
 <%- include('partials/header') %>
 
     <main>
-        <h1><%= title %></h1>
-        
+        <h1>
+            <%= title %>
+        </h1>
+
         <h2>Upcoming Service Projects</h2>
+
         <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
+            <% projects.forEach(function(project) { %>
+                <li>
+                    <h3>
+                        <%= project.title %>
+                    </h3>
+                    
+                    <p><strong>Sponsor:</strong>
+                        <%= project.organization_name %>
+                    </p>
+                    <p><strong>Date:</strong>
+                        <%= new Date(project.project_date).toLocaleDateString('en-US', { month: 'short' , day: 'numeric'
+                            , year: 'numeric' }) %>
+                    </p>
+                    <p><strong>Location:</strong>
+                        <%= project.location %>
+                    </p>
+                    <p><strong>Description:</strong>
+                        <%= project.description %>
+                    </p>
+                </li>
+                <% }); %>
         </ul>
     </main>
-    
-<%- include('partials/footer') %>
+
+    <%- include('partials/footer') %>

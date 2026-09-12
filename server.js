@@ -5,10 +5,9 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 import { testConnection } from './src/models/db.js';
-
 import { getAllOrganizations } from './src/models/organizations.js';
-
 import { getAllProjects } from './src/models/projects.js';
+import { getCategoriesWithProjects } from './src/models/categories.js';
 
 dotenv.config();
 
@@ -55,10 +54,16 @@ app.get('/projects', async (req, res) => {
     res.render('projects', { title, projects });
 });
 
-// Added route for Service Project Categories
 app.get('/categories', async (req, res) => {
-    const title = 'Service Categories';
-    res.render('categories', { title });
+    try {
+        const title = 'Service Categories';
+        const categories = await getCategoriesWithProjects();
+
+        res.render('categories', { title, categories });
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        res.status(500).send('Server Error');
+    }
 });
 
 app.listen(PORT, async () => {

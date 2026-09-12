@@ -60,4 +60,45 @@ VALUES
 
 
 SELECT * FROM public.project;
+
+
+-- 1. Create category table
+CREATE TABLE IF NOT EXISTS public.category (
+    category_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- 2. Create junction table for many-to-many project-category relationship
+CREATE TABLE IF NOT EXISTS public.project_category (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id)
+        REFERENCES public.project(project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id)
+        REFERENCES public.category(category_id)
+        ON DELETE CASCADE
+);
+
+-- 3. Insert the categories matching your view
+INSERT INTO public.category (name)
+VALUES 
+    ('Environmental'),
+    ('Educational'),
+    ('Community Service'),
+    ('Health and Wellness');
+
+-- 4. Associate existing projects (IDs 1-15) with categories
+INSERT INTO public.project_category (project_id, category_id)
+VALUES
+    (1, 1), (2, 3), (3, 3), (4, 4), (5, 1),
+    (6, 2), (7, 2), (8, 2), (9, 2), (10, 2),
+    (11, 1), (12, 1), (13, 1), (14, 1), (15, 1);
+
+
+SELECT * FROM public.category
+
 	

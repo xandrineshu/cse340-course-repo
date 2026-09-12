@@ -1,18 +1,41 @@
 <%- include('partials/header') %>
 
-    <main>     
+    <main>
         <h1>
             <%= title %>
         </h1>
 
-        <p>Explore our active service project categories below:</p>      
-        <ul>
-            <li>Environmental</li>
-            <li>Educational</li>
-            <li>Community Service</li>
-            <li>Health and Wellness</li>
+        <p>Explore our active service project categories below:</p>
+
+        <ul class="categories-list">
+            <% categories.forEach(function(category) { %>
+                <li class="category-card">
+                    <h2>
+                        <%= category.category_name %>
+                    </h2>
+
+                    <% if (category.projects && category.projects.length> 0) { %>
+                        <ul class="projects-list">
+                            <% category.projects.forEach(function(project) { %>
+                                <li class="project-card">
+                                    <h3>
+                                        <%= project.title %>
+                                    </h3>
+                                    <p class="location">📍 <%= project.location %>
+                                    </p>
+                                    <p class="date">📅 <%= new Date(project.project_date).toLocaleDateString('en-US', {
+                                            month: 'short' , day: 'numeric' , year: 'numeric' }) %>
+                                    </p>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <% } else { %>
+                            <p class="no-projects">No projects assigned to this category yet.</p>
+                            <% } %>
+                </li>
+                <% }); %>
         </ul>
 
     </main>
 
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>

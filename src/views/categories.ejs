@@ -11,7 +11,7 @@
             <% categories.forEach(function(category) { %>
                 <li class="category-card">
                     <h2>
-                        <%= category.category_name %>
+                        <%= category.name %>
                     </h2>
 
                     <% if (category.projects && category.projects.length> 0) { %>
@@ -35,7 +35,7 @@
                 </li>
                 <% }); %>
         </ul>
-
     </main>
 
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
+    

@@ -1,13 +1,13 @@
-import db from './db.js';
+import pool from './db.js';
 
-const getCategoriesWithProjects = async () => {
+export const getAllCategories = async () => {
     const query = `
         SELECT 
             c.category_id,
-            c.name AS category_name,
+            c.name,
             COALESCE(
-                JSON_AGG(
-                    JSON_BUILD_OBJECT(
+                json_agg(
+                    json_build_object(
                         'project_id', p.project_id,
                         'title', p.title,
                         'location', p.location,
@@ -22,8 +22,6 @@ const getCategoriesWithProjects = async () => {
         ORDER BY c.name ASC;
     `;
 
-    const result = await db.query(query);
+    const result = await pool.query(query);
     return result.rows;
 };
-
-export { getCategoriesWithProjects };

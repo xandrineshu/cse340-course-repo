@@ -5,9 +5,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllProjects } from './src/models/projects.js';
-import { getCategoriesWithProjects } from './src/models/categories.js';
+import router from './src/routes.js';
 
 dotenv.config();
 
@@ -47,48 +45,8 @@ app.use((req, res, next) => {
     next();
 });
 
-
-/**
-  * Routes
-  */
-app.get('/', async (req, res) => {
-    const title = 'Home';
-    res.render('home', { title });
-});
-
-app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations();
-    const title = 'Our Partner Organizations';
-
-    res.render('organizations', { title, organizations });
-});
-
-app.get('/projects', async (req, res) => {
-    const title = 'Service Projects';
-    const projects = await getAllProjects();
-
-    res.render('projects', { title, projects });
-});
-
-app.get('/categories', async (req, res) => {
-    try {
-        const title = 'Service Categories';
-        const categories = await getCategoriesWithProjects();
-
-        res.render('categories', { title, categories });
-    } catch (error) {
-        console.error('Error fetching categories:', error);
-        res.status(500).send('Server Error');
-    }
-});
-
-
-// Test route for 500 errors
-app.get('/test-error', (req, res, next) => {
-    const err = new Error('This is a test error');
-    err.status = 500;
-    next(err);
-});
+// Use the imported router to handle routes
+app.use(router);
 
 // Catch-all route for 404 errors
 app.use((req, res, next) => {

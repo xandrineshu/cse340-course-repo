@@ -1,13 +1,33 @@
-import db from './db.js'
+import pool from './db.js';
 
+// Get all organizations
 const getAllOrganizations = async () => {
-    const query = `
+  const query = `
         SELECT organization_id, name, description, contact_email, logo_filename
-      FROM public.organization;
+        FROM organization
+        ORDER BY name;
+    `;
+  const result = await pool.query(query);
+  return result.rows;
+};
+
+// Get a single organization by ID
+const getOrganizationDetails = async (organizationId) => {
+  const query = `
+      SELECT
+        organization_id,
+        name,
+        description,
+        contact_email,
+        logo_filename
+      FROM organization
+      WHERE organization_id = $1;
     `;
 
-    const result = await db.query(query);
-    return result.rows;
-}
+  const queryParams = [organizationId];
+  const result = await pool.query(query, queryParams);
 
-export { getAllOrganizations }  
+  return result.rows.length > 0 ? result.rows[0] : null;
+};
+
+export { getAllOrganizations, getOrganizationDetails };

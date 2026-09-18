@@ -1,4 +1,4 @@
-import { getUpcomingProjects, getProjectDetails } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, getCategoriesByProject } from '../models/projects.js';
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
 
@@ -26,9 +26,17 @@ const showProjectDetailsPage = async (req, res, next) => {
             return next(err);
         }
 
-        const title = 'Project Details'; // Updated to pass 'Project Details' to the header/view
+        // Fetch the categories linked to this project
+        const categories = await getCategoriesByProject(projectId);
 
-        res.render('project', { title, project });
+        const title = 'Project Details';
+
+        // Pass categories along with title and project
+        res.render('project', {
+            title,
+            project,
+            categories: categories || []
+        });
     } catch (error) {
         next(error);
     }

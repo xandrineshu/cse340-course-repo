@@ -11,7 +11,9 @@
             <% categories.forEach(function(category) { %>
                 <li class="category-card">
                     <h2>
-                        <%= category.name %>
+                        <a href="/category/<%= category.category_id %>">
+                            <%= category.name %>
+                        </a>
                     </h2>
 
                     <% if (category.projects && category.projects.length> 0) { %>
@@ -19,7 +21,9 @@
                             <% category.projects.forEach(function(project) { %>
                                 <li class="project-card">
                                     <h3>
-                                        <%= project.title %>
+                                        <a href="/project/<%= project.project_id %>">
+                                            <%= project.title %>
+                                        </a>
                                     </h3>
                                     <p class="location">📍 <%= project.location %>
                                     </p>
@@ -38,4 +42,3 @@
     </main>
 
     <%- include('partials/footer') %>
-    

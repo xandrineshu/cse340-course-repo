@@ -14,23 +14,39 @@
                 </p>
             </div>
 
+            <!-- Category Tags Section -->
+            <div class="project-categories">
+                <span class="info-label">Categories:</span>
+                <div class="tags-container">
+                    <% if (typeof categories !=='undefined' && categories && categories.length> 0) { %>
+                        <% categories.forEach(function(category) { %>
+                            <a href="/category/<%= category.category_id %>" class="category-tag">
+                                <%= category.name %>
+                            </a>
+                            <% }); %>
+                                <% } else { %>
+                                    <span class="no-tags">Uncategorized</span>
+                                    <% } %>
+                </div>
+            </div>
+
             <div class="project-info-grid">
                 <div class="info-item">
-                    <span class="info-label">Date</span>
+                    <span class="info-label">📅 Date</span>
                     <span class="info-value">
                         <%= project.date ? new Date(project.date).toLocaleDateString() : 'TBD' %>
                     </span>
                 </div>
 
                 <div class="info-item">
-                    <span class="info-label">Location</span>
+                    <span class="info-label">📍 Location</span>
                     <span class="info-value">
                         <%= project.location %>
                     </span>
                 </div>
 
                 <div class="info-item full-width">
-                    <span class="info-label">Partner Organization</span>
+                    <span class="info-label">🏛️ Partner Organization</span>
                     <span class="info-value">
                         <a href="/organization/<%= project.organization_id %>">
                             <%= project.organization_name %>

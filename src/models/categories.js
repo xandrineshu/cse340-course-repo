@@ -1,5 +1,6 @@
 import pool from './db.js';
 
+// Existing function
 export const getAllCategories = async () => {
     const query = `
         SELECT 
@@ -23,5 +24,32 @@ export const getAllCategories = async () => {
     `;
 
     const result = await pool.query(query);
+    return result.rows;
+};
+
+/**
+ * Retrieves a single category by its ID.
+ */
+export const getCategoryDetails = async (id) => {
+    const query = `
+        SELECT category_id, name
+        FROM public.category
+        WHERE category_id = $1;
+    `;
+    const result = await pool.query(query, [id]);
+    return result.rows[0];
+};
+
+/**
+ * Retrieves all categories associated with a specific service project.
+ */
+export const getCategoriesForProject = async (projectId) => {
+    const query = `
+        SELECT c.category_id, c.name
+        FROM public.category c
+        JOIN public.project_category pc ON c.category_id = pc.category_id
+        WHERE pc.project_id = $1;
+    `;
+    const result = await pool.query(query, [projectId]);
     return result.rows;
 };

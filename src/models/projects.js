@@ -28,7 +28,7 @@ const getProjectsByOrganizationId = async (organizationId) => {
           description,
           location,
           project_date
-        FROM project
+        FROM public.project
         WHERE organization_id = $1
         ORDER BY project_date;
       `;
@@ -50,8 +50,8 @@ const getUpcomingProjects = async (number_of_projects) => {
             p.location,
             p.organization_id,
             o.name AS organization_name
-        FROM project p
-        JOIN organization o ON p.organization_id = o.organization_id
+        FROM public.project p
+        JOIN public.organization o ON p.organization_id = o.organization_id
         WHERE p.project_date >= CURRENT_DATE
         ORDER BY p.project_date ASC
         LIMIT $1;
@@ -72,8 +72,8 @@ const getProjectDetails = async (id) => {
             p.location,
             p.organization_id,
             o.name AS organization_name
-        FROM project p
-        JOIN organization o ON p.organization_id = o.organization_id
+        FROM public.project p
+        JOIN public.organization o ON p.organization_id = o.organization_id
         WHERE p.project_id = $1;
     `;
     const queryParams = [id];
@@ -81,9 +81,50 @@ const getProjectDetails = async (id) => {
     return result.rows.length > 0 ? result.rows[0] : null;
 };
 
+/**
+ * Retrieves all service projects associated with a specific category ID.
+ */
+const getProjectsByCategory = async (categoryId) => {
+    const query = `
+        SELECT 
+            p.project_id,
+            p.title,
+            p.description,
+            p.project_date AS date,
+            p.location
+        FROM public.project p
+        JOIN public.project_category pc ON p.project_id = pc.project_id
+        WHERE pc.category_id = $1
+        ORDER BY p.project_date ASC;
+    `;
+    const queryParams = [categoryId];
+    const result = await db.query(query, queryParams);
+    return result.rows;
+};
+
+/**
+ * Retrieves all categories associated with a specific project ID.
+ */
+const getCategoriesByProject = async (projectId) => {
+    const query = `
+        SELECT 
+            c.category_id,
+            c.name
+        FROM public.category c
+        JOIN public.project_category pc ON c.category_id = pc.category_id
+        WHERE pc.project_id = $1
+        ORDER BY c.name ASC;
+    `;
+    const queryParams = [projectId];
+    const result = await db.query(query, queryParams);
+    return result.rows;
+};
+
 export {
     getAllProjects,
     getProjectsByOrganizationId,
     getUpcomingProjects,
-    getProjectDetails
+    getProjectDetails,
+    getProjectsByCategory,
+    getCategoriesByProject
 };

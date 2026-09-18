@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+    <main class="category-details-page">
+        <h1>
+            <%= category.name %>
+        </h1>
+
+        <div class="category-details-card">
+            <% if (typeof category.description !=='undefined' && category.description) { %>
+                <p class="category-description">
+                    <%= category.description %>
+                </p>
+                <% } %>
+
+                    <div class="category-projects-section">
+                        <h3>Associated Service Projects</h3>
+
+                        <% if (projects && projects.length> 0) { %>
+                            <ul class="category-projects-list">
+                                <% projects.forEach(project=> { %>
+                                    <li class="category-project-item">
+                                        <div class="project-info">
+                                            <a href="/project/<%= project.project_id %>" class="project-title-link">
+                                                <%= project.title %>
+                                            </a>
+                                            <% if (project.location) { %>
+                                                <span class="project-meta">
+                                                    <%= project.location %>
+                                                </span>
+                                                <% } %>
+                                                    <% if (project.date) { %>
+                                                        <span class="project-meta">
+                                                            <%= new Date(project.date).toLocaleDateString() %>
+                                                        </span>
+                                                        <% } %>
+                                        </div>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                            <% } else { %>
+                                <p class="no-projects">No service projects currently found for this category.</p>
+                                <% } %>
+                    </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>

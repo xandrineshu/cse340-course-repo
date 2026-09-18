@@ -181,6 +181,192 @@ main ul.projects-list li.project-card {
     margin-bottom: 0;
 }
 
+/* ORGANIZATION DETAILS PAGE OVERRIDES */
+
+/* Main Layout Limits */
+main.org-details-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+main.org-details-page p {
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+/* Single Box Layout: Logo on Left, Content on Right */
+.org-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #c3c6d3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.org-card img.org-logo {
+    max-width: 180px;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0;
+    /* Prevents logo from shrinking */
+}
+
+.org-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.org-card-content h2 {
+    margin-bottom: 0.75rem;
+    text-align: left;
+    color: var(--primary-color);
+}
+
+.org-card-content p {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Service Projects List (2 Columns on Desktop) */
+main ul.org-projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 0;
+}
+
+main ul.org-projects-list li.org-project-item {
+    width: calc(50% - 0.5rem);
+    text-align: left;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background-color: var(--card-bg);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+main ul.org-projects-list li.org-project-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+main ul.org-projects-list li.org-project-item a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.05rem;
+}
+
+main ul.org-projects-list li.org-project-item a:hover {
+    text-decoration: underline;
+}
+
+main.org-details-page p.no-projects {
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* SINGLE PROJECT DETAILS PAGE OVERRIDES */
+
+/* Main Page Layout */
+main.project-details-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.project-card-container {
+    background-color: var(--card-bg);
+    border: 1px solid #c3c6d3;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.project-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Description Block */
+.project-description-box {
+    background-color: var(--bg-color);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.project-description-box p {
+    text-align: left;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 0;
+}
+
+/* Metadata Grid (2 Columns on Desktop) */
+.project-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.project-info-grid .info-item {
+    width: calc(50% - 0.625rem);
+    background-color: var(--bg-color);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.project-info-grid .info-item.full-width {
+    width: 100%;
+}
+
+.project-info-grid .info-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.35rem;
+}
+
+.project-info-grid .info-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.project-info-grid .info-value a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.project-info-grid .info-value a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
 /* RESPONSIVE BREAKPOINTS */
 
 /* Tablet & Smaller Laptops */
@@ -224,6 +410,44 @@ main ul.projects-list li.project-card {
 
     /* Stack inner project cards to 1 column on mobile screens */
     main ul.projects-list li.project-card {
+        width: 100%;
+    }
+
+    /* Stack Org Card elements vertically on mobile */
+    .org-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+    }
+
+    .org-card img.org-logo {
+        max-width: 140px;
+    }
+
+    .org-card-content {
+        align-items: center;
+    }
+
+    .org-card-content h2 {
+        text-align: center;
+    }
+
+    .org-card-content p {
+        text-align: center;
+    }
+
+    /* Stack Service Projects into 1 column on mobile */
+    main ul.org-projects-list li.org-project-item {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .project-card-container {
+        padding: 1.5rem;
+    }
+
+    .project-info-grid .info-item {
         width: 100%;
     }
 }

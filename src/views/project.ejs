@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+    <main class="project-details-page">
+        <h1>Project Details</h1>
+
+        <div class="project-card-container">
+            <h2 class="project-title">
+                <%= project.title %>
+            </h2>
+
+            <div class="project-description-box">
+                <p>
+                    <%= project.description %>
+                </p>
+            </div>
+
+            <div class="project-info-grid">
+                <div class="info-item">
+                    <span class="info-label">Date</span>
+                    <span class="info-value">
+                        <%= project.date ? new Date(project.date).toLocaleDateString() : 'TBD' %>
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Location</span>
+                    <span class="info-value">
+                        <%= project.location %>
+                    </span>
+                </div>
+
+                <div class="info-item full-width">
+                    <span class="info-label">Partner Organization</span>
+                    <span class="info-value">
+                        <a href="/organization/<%= project.organization_id %>">
+                            <%= project.organization_name %>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>

@@ -1,24 +1,38 @@
 <%- include('partials/header') %>
-    <main>
+
+    <main class="org-details-page">
         <h1>
             <%= title %>
         </h1>
 
-        <h2>
-            <%= organizationDetails.name %>
-        </h2>
-        <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
+        <div class="org-card">
+            <img class="org-logo" src="/images/<%= organizationDetails.logo_filename %>"
+                alt="<%= organizationDetails.name %> logo">
 
-        <p>Description: <%= organizationDetails.description %>
-        </p>
+            <div class="org-card-content">
+                <h2>
+                    <%= organizationDetails.name %>
+                </h2>
+                <p><strong>Description:</strong>
+                    <%= organizationDetails.description %>
+                </p>
+            </div>
+        </div>
 
         <h3>Service Projects</h3>
-        <ul>
-            <% projects.forEach(project=> { %>
-                <li><a href="/project/<%= project.project_id %>">
-                        <%= project.title %>
-                    </a></li>
-                <% }) %>
+        <ul class="org-projects-list">
+            <% if (projects && projects.length> 0) { %>
+                <% projects.forEach(project=> { %>
+                    <li class="org-project-item">
+                        <a href="/project/<%= project.project_id %>">
+                            <%= project.title %>
+                        </a>
+                    </li>
+                    <% }) %>
+                        <% } else { %>
+                            <p class="no-projects">No service projects currently listed for this organization.</p>
+                            <% } %>
         </ul>
     </main>
+
     <%- include('partials/footer') %>

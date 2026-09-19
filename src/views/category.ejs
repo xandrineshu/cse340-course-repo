@@ -23,19 +23,26 @@
                                             <a href="/project/<%= project.project_id %>" class="project-title-link">
                                                 <%= project.title %>
                                             </a>
-                                            <% if (project.location) { %>
-                                                <span class="project-meta">
-                                                    <%= project.location %>
+
+                                            <div class="project-meta">
+                                                <span class="info-label">📅 Date:</span>
+                                                <span class="info-value">
+                                                    <%= project.date ? new Date(project.date).toLocaleDateString()
+                                                        : 'TBD' %>
                                                 </span>
+                                            </div>
+
+                                            <% if (project.location) { %>
+                                                <div class="project-meta">
+                                                    <span class="info-label">📍 Location:</span>
+                                                    <span class="info-value">
+                                                        <%= project.location %>
+                                                    </span>
+                                                </div>
                                                 <% } %>
-                                                    <% if (project.date) { %>
-                                                        <span class="project-meta">
-                                                            <%= new Date(project.date).toLocaleDateString() %>
-                                                        </span>
-                                                        <% } %>
                                         </div>
                                     </li>
-                                    <% }) %>
+                                    <% }); %>
                             </ul>
                             <% } else { %>
                                 <p class="no-projects">No service projects currently found for this category.</p>

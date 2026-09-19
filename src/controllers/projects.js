@@ -6,7 +6,7 @@ const NUMBER_OF_UPCOMING_PROJECTS = 5;
 const showProjectsPage = async (req, res, next) => {
     try {
         const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
-        const title = 'Upcoming Service Projects'; // Updated title per activity requirements
+        const title = 'Service Projects'; // Updated title per activity requirements
 
         res.render('projects', { title, projects });
     } catch (error) {

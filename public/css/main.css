@@ -34,6 +34,19 @@ body {
    2. TYPOGRAPHY & GENERAL LAYOUT
    ========================================================================== */
 
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
 h1 {
     color: var(--primary-color);
     margin-bottom: 2.5rem;
@@ -90,7 +103,9 @@ nav ul {
     justify-content: center;
 }
 
-nav ul li a {
+nav ul li a,
+nav ul li a:link,
+nav ul li a:visited {
     display: block;
     color: #ffffff;
     padding: 15px 3rem;
@@ -99,6 +114,8 @@ nav ul li a {
 
 nav ul li a:hover {
     background-color: var(--secondary-color);
+    color: #ffffff;
+    text-decoration: none;
 }
 
 /* ==========================================================================
@@ -141,6 +158,28 @@ main ul li img {
     border-radius: 8px;
 }
 
+/* Organization List Specific Item Styles */
+main ul li a.org-name-link,
+main ul li a.org-name-link:link,
+main ul li a.org-name-link:visited {
+    color: var(--primary-color);
+    font-size: 1.15rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+}
+
+main ul li a.org-name-link:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+main ul li span.org-email {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
 /* ==========================================================================
    4. CATEGORIES OVERVIEW PAGE
    ========================================================================== */
@@ -159,15 +198,17 @@ main ul.categories-list>li.category-card {
     justify-content: flex-start;
 }
 
-main ul.categories-list h2 a {
+main ul.categories-list h2 a,
+main ul.categories-list h2 a:link,
+main ul.categories-list h2 a:visited {
     color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 main ul.categories-list h2 a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 /* Inner Projects List (Inside Category Cards) */
@@ -196,15 +237,17 @@ main ul.projects-list li.project-card {
     margin-bottom: 0.25rem;
 }
 
-.project-card h3 a {
+.project-card h3 a,
+.project-card h3 a:link,
+.project-card h3 a:visited {
     color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .project-card h3 a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 .project-card .location,
@@ -271,7 +314,7 @@ main ul.category-projects-list li.category-project-item {
     box-shadow: none;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -283,25 +326,43 @@ main ul.category-projects-list li.category-project-item:hover {
 .category-project-item .project-info {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
     width: 100%;
 }
 
-.category-project-item .project-title-link {
+.category-project-item .project-title-link,
+.category-project-item .project-title-link:link,
+.category-project-item .project-title-link:visited {
     color: var(--primary-color);
     font-weight: 600;
     text-decoration: none;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
 }
 
 .category-project-item .project-title-link:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 .category-project-item .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 0.85rem;
+}
+
+.category-project-item .info-label {
+    font-weight: 700;
     color: var(--text-light);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-project-item .info-value {
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
 main.category-details-page p.no-projects {
@@ -322,6 +383,18 @@ main.org-details-page {
 main.org-details-page p {
     text-align: left;
     margin-bottom: 0.5rem;
+}
+
+main.org-details-page a,
+main.org-details-page a:link,
+main.org-details-page a:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+main.org-details-page a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 .org-card {
@@ -392,7 +465,9 @@ main ul.org-projects-list li.org-project-item:hover {
     transform: translateY(-2px);
 }
 
-main ul.org-projects-list li.org-project-item a {
+main ul.org-projects-list li.org-project-item a,
+main ul.org-projects-list li.org-project-item a:link,
+main ul.org-projects-list li.org-project-item a:visited {
     color: var(--primary-color);
     font-weight: 600;
     text-decoration: none;
@@ -400,7 +475,8 @@ main ul.org-projects-list li.org-project-item a {
 }
 
 main ul.org-projects-list li.org-project-item a:hover {
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 main.org-details-page p.no-projects {
@@ -415,6 +491,18 @@ main.org-details-page p.no-projects {
 main.project-details-page {
     max-width: 800px;
     margin: 0 auto;
+}
+
+main.project-details-page a,
+main.project-details-page a:link,
+main.project-details-page a:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+main.project-details-page a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 .project-card-container {
@@ -469,9 +557,10 @@ main.project-details-page {
     flex-wrap: wrap;
 }
 
-.category-tag {
-    background-color: var(--secondary-color);
-    color: #ffffff;
+.category-tag,
+.category-tag:link,
+.category-tag:visited {
+    background-color: var(--border-dark);
     padding: 0.35rem 0.85rem;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -481,8 +570,10 @@ main.project-details-page {
 }
 
 .category-tag:hover {
-    background-color: var(--primary-color);
+    background-color: var(--border-color);
+    color: #ffffff;
     transform: translateY(-1px);
+    text-decoration: none;
 }
 
 .no-tags {
@@ -528,15 +619,17 @@ main.project-details-page {
     color: var(--primary-color);
 }
 
-.project-info-grid .info-value a {
+.project-info-grid .info-value a,
+.project-info-grid .info-value a:link,
+.project-info-grid .info-value a:visited {
     color: var(--secondary-color);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .project-info-grid .info-value a:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 /* ==========================================================================
@@ -560,7 +653,9 @@ main.project-details-page {
         flex-direction: column;
     }
 
-    nav ul li a {
+    nav ul li a,
+    nav ul li a:link,
+    nav ul li a:visited {
         padding: 10px 1rem;
         text-align: center;
     }

@@ -30,6 +30,7 @@ body {
     min-height: 100vh;
 }
 
+
 /* ==========================================================================
    2. TYPOGRAPHY & GENERAL LAYOUT
    ========================================================================== */
@@ -118,6 +119,7 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
+
 /* ==========================================================================
    3. BASE LISTS & CARDS (Standard 4-Column Layout)
    ========================================================================== */
@@ -179,6 +181,7 @@ main ul li span.org-email {
     font-size: 0.9rem;
     color: var(--text-light);
 }
+
 
 /* ==========================================================================
    4. CATEGORIES OVERVIEW PAGE
@@ -256,6 +259,7 @@ main ul.projects-list li.project-card {
     color: var(--text-light);
     margin-bottom: 0;
 }
+
 
 /* ==========================================================================
    5. CATEGORY DETAILS PAGE
@@ -371,6 +375,7 @@ main.category-details-page p.no-projects {
     text-align: left;
 }
 
+
 /* ==========================================================================
    6. ORGANIZATION DETAILS PAGE
    ========================================================================== */
@@ -483,6 +488,7 @@ main.org-details-page p.no-projects {
     color: var(--text-light);
     font-style: italic;
 }
+
 
 /* ==========================================================================
    7. SINGLE PROJECT DETAILS PAGE
@@ -632,6 +638,7 @@ main.project-details-page a:hover {
     text-decoration: none;
 }
 
+
 /* ==========================================================================
    8. RESPONSIVE MEDIA QUERIES
    ========================================================================== */
@@ -718,4 +725,172 @@ main.project-details-page a:hover {
         align-items: flex-start;
         gap: 0.35rem;
     }
+}
+
+
+/* ==========================================================================
+   9. FLASH MESSAGES
+   ========================================================================== */
+
+/* Flash message styles */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert.info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+
+/* ==========================================================================
+   10. NEW ORGANIZATION FORM STYLES
+   ========================================================================== */
+
+/* Center and container-constrain the form on the page */
+main form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form layout groups */
+main .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+/* Form labels */
+main .form-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Input fields and textarea */
+main .form-group input,
+main .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Textarea height */
+main .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Focus effects on inputs */
+main .form-group input:focus,
+main .form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+/* Submit button */
+main form button[type="submit"] {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+main form button[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* Mobile responsive layout */
+@media only screen and (max-width: 700px) {
+    main form {
+        padding: 1.5rem;
+    }
+}
+
+
+/* ==========================================================================
+   11. ORGANIZATIONS LIST PAGE STYLES
+   ========================================================================== */
+
+/* Subtitle paragraph spacing */
+main>p {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Ensure images fit neatly inside card containers */
+main ul li img {
+    max-width: 100%;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+/* Add a new organization link styled as a call-to-action button */
+main p a[href="/new-organization"] {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+main p a[href="/new-organization"]:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
 }

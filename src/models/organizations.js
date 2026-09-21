@@ -46,7 +46,7 @@ const createOrganization = async (name, description, contactEmail, logoFilename)
     `;
 
   const queryParams = [name, description, contactEmail, logoFilename];
-  const result = await db.query(query, queryParams);
+  const result = await pool.query(query, queryParams);
 
   if (result.rows.length === 0) {
     throw new Error('Failed to create organization');

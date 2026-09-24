@@ -911,3 +911,111 @@ main p a[href="/new-project"]:hover {
     color: #ffffff;
     transform: translateY(-2px);
 }
+
+
+/* ==========================================================================
+   12. ASSIGN CATEGORIES FORM & CHECKBOXES
+   ========================================================================== */
+
+/* Custom list layout for checkboxes inside assign-categories.ejs */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+/* Individual checkbox row items */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.25rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.checkbox-item:hover {
+    border-color: var(--secondary-color);
+    background-color: #ffffff;
+    transform: translateX(2px);
+}
+
+/* Checkbox inputs */
+.checkbox-item input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+/* Checkbox labels */
+.checkbox-item label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+    text-transform: none;
+    /* Keeps normal casing instead of uppercase */
+    letter-spacing: normal;
+}
+
+
+/* ==========================================================================
+   13. BUTTON STYLES (EDIT CATEGORIES BUTTON)
+   ========================================================================== */
+
+.project-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Base button style matching your primary buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--border-dark);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover,
+.btn:link:hover,
+.btn:visited:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   14. ORGANIZATION ACTIONS (EDIT BUTTON)
+   ========================================================================== */
+
+.org-card-content p.org-actions {
+    margin-top: 1.25rem;
+}
+
+/* Ensure org-card button text retains white color on hover/visited */
+.org-card-content p.org-actions a.btn,
+.org-card-content p.org-actions a.btn:link,
+.org-card-content p.org-actions a.btn:visited {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+}
+
+.org-card-content p.org-actions a.btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}

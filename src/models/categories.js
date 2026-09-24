@@ -1,5 +1,30 @@
 import pool from './db.js';
 
+const assignCategoryToProject = async (categoryId, projectId) => {
+    const query = `
+        INSERT INTO project_category (category_id, project_id)
+        VALUES ($1, $2);
+    `;
+
+    await pool.query(query, [categoryId, projectId]);
+};
+
+const updateCategoryAssignments = async (projectId, categoryIds) => {
+    // First, remove existing category assignments for the project
+    const deleteQuery = `
+        DELETE FROM project_category
+        WHERE project_id = $1;
+    `;
+    await pool.query(deleteQuery, [projectId]);
+
+    // Next, add the new category assignments
+    for (const categoryId of categoryIds) {
+        if (categoryId) {
+            await assignCategoryToProject(categoryId, projectId);
+        }
+    }
+};
+
 // Existing function
 export const getAllCategories = async () => {
     const query = `
@@ -53,3 +78,5 @@ export const getCategoriesForProject = async (projectId) => {
     const result = await pool.query(query, [projectId]);
     return result.rows;
 };
+
+export { updateCategoryAssignments };

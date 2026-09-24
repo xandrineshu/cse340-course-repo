@@ -101,4 +101,15 @@ VALUES
 
 SELECT * FROM public.category
 
+
+
+-- If need to delete unnecessary project tests
+-- Step 1: Remove any category connections for project ID
+DELETE FROM public.project_category 
+WHERE project_id = ;
+
+-- Step 2: Delete project 17
+DELETE FROM public.project 
+WHERE project_id = ;
+
 	

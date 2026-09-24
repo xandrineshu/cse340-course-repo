@@ -736,14 +736,27 @@ main.project-details-page a:hover {
     max-width: 600px;
     margin: 1.5rem auto 0 auto;
     padding: 0.85rem 1.25rem;
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
     border-radius: 8px;
     text-align: center;
     font-weight: 500;
     font-size: 0.95rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Default / Error Flash Messages (Red) */
+.flash-messages,
+.flash-messages.error,
+.flash-messages.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Success Flash Messages (Green) */
+.flash-messages.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
 }
 
 /* Hide the container when there are no messages to display */
@@ -753,7 +766,7 @@ main.project-details-page a:hover {
 
 
 /* ==========================================================================
-   10. NEW ORGANIZATION FORM STYLES
+   10. FORM STYLES (NEW ORGANIZATION & NEW PROJECT FORMS)
    ========================================================================== */
 
 /* Center and container-constrain the form on the page */
@@ -787,8 +800,9 @@ main .form-group label {
     letter-spacing: 0.5px;
 }
 
-/* Input fields and textarea */
+/* Input fields, selects, and textareas */
 main .form-group input,
+main .form-group select,
 main .form-group textarea {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -801,14 +815,28 @@ main .form-group textarea {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Select dropdown specific styling */
+main .form-group select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%202d3748' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+}
+
 /* Textarea height */
 main .form-group textarea {
     resize: vertical;
     min-height: 120px;
 }
 
-/* Focus effects on inputs */
+/* Focus effects on inputs, selects, and textareas */
 main .form-group input:focus,
+main .form-group select:focus,
 main .form-group textarea:focus {
     outline: none;
     border-color: var(--secondary-color);
@@ -843,7 +871,7 @@ main form button[type="submit"]:hover {
 
 
 /* ==========================================================================
-   11. ORGANIZATIONS LIST PAGE STYLES
+   11. ORGANIZATIONS & PROJECTS LIST PAGE CALL-TO-ACTION BUTTONS
    ========================================================================== */
 
 /* Subtitle paragraph spacing */
@@ -863,8 +891,9 @@ main ul li img {
     border-radius: 8px;
 }
 
-/* Add a new organization link styled as a call-to-action button */
-main p a[href="/new-organization"] {
+/* Add new organization/project links styled as call-to-action buttons */
+main p a[href="/new-organization"],
+main p a[href="/new-project"] {
     display: inline-block;
     margin-top: 2.5rem;
     padding: 0.75rem 1.75rem;
@@ -876,7 +905,8 @@ main p a[href="/new-organization"] {
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-main p a[href="/new-organization"]:hover {
+main p a[href="/new-organization"]:hover,
+main p a[href="/new-project"]:hover {
     background-color: var(--secondary-color);
     color: #ffffff;
     transform: translateY(-2px);

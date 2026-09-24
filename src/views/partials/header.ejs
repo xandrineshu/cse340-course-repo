@@ -21,13 +21,15 @@
     
     <% const messages=flash(); %>
     <% if (Object.keys(messages).some(type=> messages[type].length > 0)) { %>
-        <div class="flash-messages">
-            <% Object.keys(messages).forEach(type=> { %>
-                <% if (messages[type].length> 0) { %>
+        <% Object.keys(messages).forEach(type=> { %>
+            <% if (messages[type].length> 0) { %>
+                <div class="flash-messages <%= type %>">
                     <% messages[type].forEach(msg=> { %>
-                        <%= msg %>
+                        <p>
+                            <%= msg %>
+                        </p>
                     <% }); %>
-                <% } %>
-            <% }); %>
-        </div>
+                </div>
+            <% } %>
+        <% }); %>
     <% } %>

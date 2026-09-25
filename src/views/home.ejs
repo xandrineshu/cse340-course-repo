@@ -1,16 +1,46 @@
 <%- include('partials/header') %>
 
-    <main>
-        <h1>
-            <%= title %>
-        </h1>
+    <main class="home-page">
+        <section class="hero-container">
+            <div class="hero-logo-box">
+                <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+            </div>
 
-        <h2>Welcome to the CSE 340 Service Network!</h2>
-        <p>Our mission is to promote service across the world by connecting volunteers with service opportunities in
-            their community.</p>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <%= title %>
+                </h1>
+                <p class="hero-subtitle">
+                    Welcome to the <strong>CSE 340 Service Network</strong>! Our mission is to promote service across
+                    the world by connecting passionate volunteers with meaningful community opportunities.
+                </p>
 
-        <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+                <div class="hero-cta">
+                    <a href="/projects" class="btn btn-primary">Browse Projects</a>
+                    <a href="/organizations" class="btn btn-secondary">Explore Organizations</a>
+                </div>
+            </div>
+        </section>
 
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Find Opportunities</h3>
+                <p>Discover local projects tailored to your passion, skills, and availability.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <h3>Partner Organizations</h3>
+                <p>Connect with vetted non-profits and institutions making a real impact.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>Make an Impact</h3>
+                <p>Join hands with fellow community members and make a lasting difference.</p>
+            </div>
+        </section>
     </main>
 
     <%- include('partials/footer') %>

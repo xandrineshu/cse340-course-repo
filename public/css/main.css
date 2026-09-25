@@ -79,6 +79,13 @@ main p {
     margin-bottom: 0;
 }
 
+main>p {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
 footer {
     background-color: var(--primary-color);
     color: #ffffff;
@@ -121,9 +128,10 @@ nav ul li a:hover {
 
 
 /* ==========================================================================
-   3. BASE LISTS & CARDS (Standard 4-Column Layout)
+   3. COMPONENTS, BUTTONS & CARDS
    ========================================================================== */
 
+/* Base 3-Column Grid Cards */
 main ul {
     list-style-type: none;
     display: flex;
@@ -139,7 +147,7 @@ main ul li {
     border: 1px solid var(--border-dark);
     border-radius: 12px;
     padding: 1.25rem;
-    width: calc(25% - 1.25rem);
+    width: calc(33.333% - 5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -155,12 +163,351 @@ main ul li:hover {
 
 main ul li img {
     max-width: 100%;
-    height: auto;
+    height: 100px;
+    object-fit: contain;
     margin-bottom: 1rem;
     border-radius: 8px;
 }
 
-/* Organization List Specific Item Styles */
+/* Buttons */
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--border-dark);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover,
+.btn:link:hover,
+.btn:visited:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* Call-To-Action Banner Links */
+main p a[href="/new-organization"],
+main p a[href="/new-project"] {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+main p a[href="/new-organization"]:hover,
+main p a[href="/new-project"]:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   4. FORMS & FLASH MESSAGES
+   ========================================================================== */
+
+/* Flash Messages */
+.flash-messages {
+    max-width: 600px;
+    margin: 1.5rem auto 0 auto;
+    padding: 0.85rem 1.25rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.flash-messages,
+.flash-messages.error,
+.flash-messages.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.flash-messages.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-messages:empty {
+    display: none;
+}
+
+/* Forms */
+main form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+main .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+main .form-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+main .form-group input,
+main .form-group select,
+main .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+main .form-group select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%202d3748' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+}
+
+main .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+main .form-group input:focus,
+main .form-group select:focus,
+main .form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+}
+
+main form button[type="submit"] {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+main form button[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* Assign Categories Checkboxes */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.25rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.checkbox-item:hover {
+    border-color: var(--secondary-color);
+    background-color: #ffffff;
+    transform: translateX(2px);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+
+/* ==========================================================================
+   5. HOME PAGE
+   ========================================================================== */
+
+main.home-page {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem 0 3rem 0;
+}
+
+.hero-logo-box {
+    flex: 0 0 300px;
+    display: flex;
+    justify-content: center;
+}
+
+img.main-logo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: none;
+    margin: 0;
+}
+
+.hero-content {
+    flex: 1;
+    text-align: left;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: left;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+    text-align: left;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-cta .btn {
+    padding: 0.85rem 1.75rem;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.hero-cta .btn-primary {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.hero-cta .btn-primary:hover {
+    background-color: var(--secondary-color);
+}
+
+.hero-cta .btn-secondary {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+.hero-cta .btn-secondary:hover {
+    background-color: var(--secondary-color);
+}
+
+.features-grid {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    width: calc(33.333% - 1rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   6. ORGANIZATIONS
+   ========================================================================== */
+
+/* Organization List Items */
 main ul li a.org-name-link,
 main ul li a.org-name-link:link,
 main ul li a.org-name-link:visited {
@@ -182,16 +529,301 @@ main ul li span.org-email {
     color: var(--text-light);
 }
 
+/* Organization Details Page */
+main.org-details-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+main.org-details-page p {
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+main.org-details-page a,
+main.org-details-page a:link,
+main.org-details-page a:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+main.org-details-page a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.org-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.org-card img.org-logo {
+    max-width: 180px;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.org-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.org-card-content h2 {
+    margin-bottom: 0.75rem;
+    text-align: left;
+    color: var(--primary-color);
+}
+
+.org-card-content p {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.org-card-content p.org-actions {
+    margin-top: 1.25rem;
+}
+
+.org-card-content p.org-actions a.btn,
+.org-card-content p.org-actions a.btn:link,
+.org-card-content p.org-actions a.btn:visited {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+}
+
+.org-card-content p.org-actions a.btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+main ul.org-projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 0;
+}
+
+main ul.org-projects-list li.org-project-item {
+    width: calc(50% - 0.5rem);
+    text-align: left;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+main ul.org-projects-list li.org-project-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+main ul.org-projects-list li.org-project-item a,
+main ul.org-projects-list li.org-project-item a:link,
+main ul.org-projects-list li.org-project-item a:visited {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.05rem;
+}
+
+main ul.org-projects-list li.org-project-item a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+main.org-details-page p.no-projects {
+    color: var(--text-light);
+    font-style: italic;
+}
+
 
 /* ==========================================================================
-   4. CATEGORIES OVERVIEW PAGE
+   7. PROJECTS
    ========================================================================== */
 
+main.project-details-page {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+main.project-details-page a,
+main.project-details-page a:link,
+main.project-details-page a:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+main.project-details-page a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.project-card-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.project-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.project-description-box {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-description-box p {
+    text-align: left;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 0;
+}
+
+/* Category Tags */
+.project-categories {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.project-categories .info-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.tags-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.category-tag,
+.category-tag:link,
+.category-tag:visited {
+    background-color: var(--border-dark);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.category-tag:hover {
+    background-color: var(--border-color);
+    color: #ffffff;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.no-tags {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Project Actions */
+.project-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Project Metadata Grid */
+.project-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.project-info-grid .info-item {
+    width: calc(50% - 0.625rem);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.project-info-grid .info-item.full-width {
+    width: 100%;
+}
+
+.project-info-grid .info-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.35rem;
+}
+
+.project-info-grid .info-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.project-info-grid .info-value a,
+.project-info-grid .info-value a:link,
+.project-info-grid .info-value a:visited {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.project-info-grid .info-value a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+
+/* ==========================================================================
+   8. CATEGORIES
+   ========================================================================== */
+
+/* Overview Page */
 main ul.categories-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    justify-content: space-between;
+    justify-content: center;
+    max-width: 1150px;
+    margin: 0 auto;
 }
 
 main ul.categories-list>li.category-card {
@@ -214,7 +846,7 @@ main ul.categories-list h2 a:hover {
     text-decoration: none;
 }
 
-/* Inner Projects List (Inside Category Cards) */
+/* Projects Grid inside Category Card */
 main ul.projects-list {
     display: flex;
     flex-direction: row;
@@ -260,11 +892,7 @@ main ul.projects-list li.project-card {
     margin-bottom: 0;
 }
 
-
-/* ==========================================================================
-   5. CATEGORY DETAILS PAGE
-   ========================================================================== */
-
+/* Category Details Page */
 main.category-details-page {
     max-width: 900px;
     margin: 0 auto;
@@ -377,273 +1005,10 @@ main.category-details-page p.no-projects {
 
 
 /* ==========================================================================
-   6. ORGANIZATION DETAILS PAGE
+   9. RESPONSIVE MEDIA QUERIES
    ========================================================================== */
 
-main.org-details-page {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-main.org-details-page p {
-    text-align: left;
-    margin-bottom: 0.5rem;
-}
-
-main.org-details-page a,
-main.org-details-page a:link,
-main.org-details-page a:visited {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-main.org-details-page a:hover {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-.org-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    background-color: var(--card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-dark);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
-}
-
-.org-card img.org-logo {
-    max-width: 180px;
-    max-height: 140px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    flex-shrink: 0;
-}
-
-.org-card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.org-card-content h2 {
-    margin-bottom: 0.75rem;
-    text-align: left;
-    color: var(--primary-color);
-}
-
-.org-card-content p {
-    font-size: 1.05rem;
-    color: var(--text-color);
-    line-height: 1.7;
-    margin-bottom: 0;
-}
-
-main ul.org-projects-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-    padding: 0;
-}
-
-main ul.org-projects-list li.org-project-item {
-    width: calc(50% - 0.5rem);
-    text-align: left;
-    align-items: flex-start;
-    padding: 1.25rem;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: none;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-main ul.org-projects-list li.org-project-item:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-main ul.org-projects-list li.org-project-item a,
-main ul.org-projects-list li.org-project-item a:link,
-main ul.org-projects-list li.org-project-item a:visited {
-    color: var(--primary-color);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 1.05rem;
-}
-
-main ul.org-projects-list li.org-project-item a:hover {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-main.org-details-page p.no-projects {
-    color: var(--text-light);
-    font-style: italic;
-}
-
-
-/* ==========================================================================
-   7. SINGLE PROJECT DETAILS PAGE
-   ========================================================================== */
-
-main.project-details-page {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-main.project-details-page a,
-main.project-details-page a:link,
-main.project-details-page a:visited {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-main.project-details-page a:hover {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-.project-card-container {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-dark);
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.project-title {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.project-description-box {
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.project-description-box p {
-    text-align: left;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text-color);
-    margin-bottom: 0;
-}
-
-/* Category Tags */
-.project-categories {
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.project-categories .info-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    color: var(--text-light);
-}
-
-.tags-container {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.category-tag,
-.category-tag:link,
-.category-tag:visited {
-    background-color: var(--border-dark);
-    padding: 0.35rem 0.85rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.category-tag:hover {
-    background-color: var(--border-color);
-    color: #ffffff;
-    transform: translateY(-1px);
-    text-decoration: none;
-}
-
-.no-tags {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-style: italic;
-}
-
-/* Metadata Grid */
-.project-info-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-}
-
-.project-info-grid .info-item {
-    width: calc(50% - 0.625rem);
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.project-info-grid .info-item.full-width {
-    width: 100%;
-}
-
-.project-info-grid .info-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    color: var(--text-light);
-    margin-bottom: 0.35rem;
-}
-
-.project-info-grid .info-value {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-.project-info-grid .info-value a,
-.project-info-grid .info-value a:link,
-.project-info-grid .info-value a:visited {
-    color: var(--secondary-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.project-info-grid .info-value a:hover {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-
-/* ==========================================================================
-   8. RESPONSIVE MEDIA QUERIES
-   ========================================================================== */
-
-/* Tablet & Smaller Laptops */
+/* Laptops & Tablets (1024px and below) */
 @media only screen and (max-width: 1024px) {
     main ul li {
         width: calc(50% - 1.25rem);
@@ -654,7 +1019,41 @@ main.project-details-page a:hover {
     }
 }
 
-/* Mobile Devices */
+/* Medium Tablets (850px and below) */
+@media only screen and (max-width: 850px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-logo-box {
+        flex: 0 0 auto;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+        text-align: center;
+    }
+
+    .hero-cta {
+        justify-content: center;
+    }
+
+    .features-grid {
+        flex-direction: column;
+    }
+
+    .feature-card {
+        width: 100%;
+    }
+}
+
+/* Mobile Devices (700px and below) */
 @media only screen and (max-width: 700px) {
     nav ul {
         flex-direction: column;
@@ -674,6 +1073,10 @@ main.project-details-page a:hover {
     h1 {
         font-size: 1.75rem;
         margin-bottom: 1.5rem;
+    }
+
+    main form {
+        padding: 1.5rem;
     }
 
     main ul li,
@@ -698,7 +1101,7 @@ main.project-details-page a:hover {
         padding: 1rem;
     }
 
-    /* Org Card Stack */
+    /* Org Card Mobile Layout */
     .org-card {
         flex-direction: column;
         text-align: center;
@@ -719,303 +1122,10 @@ main.project-details-page a:hover {
         text-align: center;
     }
 
-    /* Project Tags Stack */
+    /* Tags Stack */
     .project-categories {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.35rem;
     }
-}
-
-
-/* ==========================================================================
-   9. FLASH MESSAGES
-   ========================================================================== */
-
-.flash-messages {
-    max-width: 600px;
-    margin: 1.5rem auto 0 auto;
-    padding: 0.85rem 1.25rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 0.95rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Default / Error Flash Messages (Red) */
-.flash-messages,
-.flash-messages.error,
-.flash-messages.danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Success Flash Messages (Green) */
-.flash-messages.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-/* Hide the container when there are no messages to display */
-.flash-messages:empty {
-    display: none;
-}
-
-
-/* ==========================================================================
-   10. FORM STYLES (NEW ORGANIZATION & NEW PROJECT FORMS)
-   ========================================================================== */
-
-/* Center and container-constrain the form on the page */
-main form {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-dark);
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Form layout groups */
-main .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: left;
-}
-
-/* Form labels */
-main .form-group label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Input fields, selects, and textareas */
-main .form-group input,
-main .form-group select,
-main .form-group textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 1rem;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Select dropdown specific styling */
-main .form-group select {
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%202d3748' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1.2em;
-    padding-right: 2.5rem;
-}
-
-/* Textarea height */
-main .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* Focus effects on inputs, selects, and textareas */
-main .form-group input:focus,
-main .form-group select:focus,
-main .form-group textarea:focus {
-    outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
-}
-
-/* Submit button */
-main form button[type="submit"] {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    padding: 0.85rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    margin-top: 0.5rem;
-}
-
-main form button[type="submit"]:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-1px);
-}
-
-/* Mobile responsive layout */
-@media only screen and (max-width: 700px) {
-    main form {
-        padding: 1.5rem;
-    }
-}
-
-
-/* ==========================================================================
-   11. ORGANIZATIONS & PROJECTS LIST PAGE CALL-TO-ACTION BUTTONS
-   ========================================================================== */
-
-/* Subtitle paragraph spacing */
-main>p {
-    text-align: center;
-    color: var(--text-light);
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Ensure images fit neatly inside card containers */
-main ul li img {
-    max-width: 100%;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-}
-
-/* Add new organization/project links styled as call-to-action buttons */
-main p a[href="/new-organization"],
-main p a[href="/new-project"] {
-    display: inline-block;
-    margin-top: 2.5rem;
-    padding: 0.75rem 1.75rem;
-    background-color: var(--primary-color);
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-main p a[href="/new-organization"]:hover,
-main p a[href="/new-project"]:hover {
-    background-color: var(--secondary-color);
-    color: #ffffff;
-    transform: translateY(-2px);
-}
-
-
-/* ==========================================================================
-   12. ASSIGN CATEGORIES FORM & CHECKBOXES
-   ========================================================================== */
-
-/* Custom list layout for checkboxes inside assign-categories.ejs */
-.checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin: 1.5rem 0;
-}
-
-/* Individual checkbox row items */
-.checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 0.85rem 1.25rem;
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
-}
-
-.checkbox-item:hover {
-    border-color: var(--secondary-color);
-    background-color: #ffffff;
-    transform: translateX(2px);
-}
-
-/* Checkbox inputs */
-.checkbox-item input[type="checkbox"] {
-    width: 1.25rem;
-    height: 1.25rem;
-    accent-color: var(--secondary-color);
-    cursor: pointer;
-}
-
-/* Checkbox labels */
-.checkbox-item label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-    cursor: pointer;
-    user-select: none;
-    flex: 1;
-    text-transform: none;
-    /* Keeps normal casing instead of uppercase */
-    letter-spacing: normal;
-}
-
-
-/* ==========================================================================
-   13. BUTTON STYLES (EDIT CATEGORIES BUTTON)
-   ========================================================================== */
-
-.project-actions {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-/* Base button style matching your primary buttons */
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--border-dark);
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.btn:hover,
-.btn:link:hover,
-.btn:visited:hover {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    text-decoration: none;
-    transform: translateY(-2px);
-}
-
-
-/* ==========================================================================
-   14. ORGANIZATION ACTIONS (EDIT BUTTON)
-   ========================================================================== */
-
-.org-card-content p.org-actions {
-    margin-top: 1.25rem;
-}
-
-/* Ensure org-card button text retains white color on hover/visited */
-.org-card-content p.org-actions a.btn,
-.org-card-content p.org-actions a.btn:link,
-.org-card-content p.org-actions a.btn:visited {
-    background-color: var(--secondary-color);
-    color: #ffffff;
-}
-
-.org-card-content p.org-actions a.btn:hover {
-    background-color: var(--primary-color);
-    color: #ffffff;
 }

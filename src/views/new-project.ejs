@@ -6,7 +6,7 @@
 
         <form action="/new-project" method="POST">
             <div class="form-group">
-                <label for="title">Project Title</label>
+                <label for="title">🤝 Project Title</label>
                 <input type="text" id="title" name="title" maxlength="150" required />
             </div>
 
@@ -26,9 +26,9 @@
             </div>
 
             <div class="form-group">
-                <label for="organizationId">Organization</label>
+                <label for="organizationId">🏛️ Organization</label>
                 <select id="organizationId" name="organizationId" required>
-                    <option value="">🤝 Select an organization</option>
+                    <option value="">Select an organization</option>
                     <% organizations.forEach(org=> { %>
                         <option value="<%= org.organization_id %>">
                             <%= org.name %>

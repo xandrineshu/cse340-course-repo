@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label for="organizationId">Organization</label>
                 <select id="organizationId" name="organizationId" required>
-                    <option value="">Select an organization</option>
+                    <option value="">🤝 Select an organization</option>
                     <% organizations.forEach(org=> { %>
                         <option value="<%= org.organization_id %>" <%=(org.organization_id==project.organization_id)
                             ? 'selected' : '' %>
@@ -41,7 +41,7 @@
                 </select>
             </div>
 
-            <button type="submit">Update Project</button>
+            <button type="submit">🛠️ Update Project</button>
         </form>
     </main>
     <%- include('partials/footer') %>

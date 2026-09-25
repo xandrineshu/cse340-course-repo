@@ -1,11 +1,10 @@
 import express from 'express';
 
 import { showHomePage } from './controllers/index.js';
-import { showOrganizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation } from './controllers/organizations.js';
+import { showOrganizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, showEditOrganizationForm, processEditOrganizationForm, organizationValidation } from './controllers/organizations.js';
 import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, showEditProjectForm, processEditProjectForm, projectValidation } from './controllers/projects.js';
-import { showCategoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm } from './controllers/categories.js';
+import { showCategoriesPage, showCategoryDetailsPage, showNewCategoryForm, processNewCategoryForm, showEditCategoryForm, processEditCategoryForm, showAssignCategoriesForm, processAssignCategoriesForm } from './controllers/categories.js';
 import { testErrorPage } from './controllers/errors.js';
-import { showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
 
 const router = express.Router();
 
@@ -19,6 +18,14 @@ router.get('/project/:id', showProjectDetailsPage);
 
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
+
+// Routes for Category creation
+router.get('/new-category', showNewCategoryForm);
+router.post('/new-category', processNewCategoryForm);
+
+// Routes for Category editing
+router.get('/edit-category/:id', showEditCategoryForm);
+router.post('/edit-category/:id', processEditCategoryForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

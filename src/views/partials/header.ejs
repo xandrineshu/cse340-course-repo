@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
@@ -18,7 +20,6 @@
         </ul>
     </nav>
 
-    
     <% const messages=flash(); %>
     <% if (Object.keys(messages).some(type=> messages[type].length > 0)) { %>
         <% Object.keys(messages).forEach(type=> { %>
@@ -32,4 +33,15 @@
                 </div>
             <% } %>
         <% }); %>
+    <% } %>
+
+    <% /* Render validation errors array if passed from route */%>
+    <% if (typeof errors !=='undefined' && errors && errors.length> 0) { %>
+        <div class="flash-messages error">
+            <% errors.forEach(function(error) { %>
+                <p>
+                    <%= error %>
+                </p>
+            <% }); %>
+        </div>
     <% } %>

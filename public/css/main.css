@@ -218,11 +218,14 @@ main p a[href="/new-project"]:hover {
    4. FORMS & FLASH MESSAGES
    ========================================================================== */
 
-/* Flash Messages */
-.flash-messages {
-    max-width: 600px;
+/* Flash Messages & Error Containers */
+.flash-messages,
+.errors {
+    width: 90%;
+    max-width: 800px;
     margin: 1.5rem auto 0 auto;
-    padding: 0.85rem 1.25rem;
+    /* Gives clean, uniform spacing under navbar across all views */
+    padding: 0.75rem 1.25rem;
     border-radius: 8px;
     text-align: center;
     font-weight: 500;
@@ -230,6 +233,8 @@ main p a[href="/new-project"]:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* Base Red/Error Style */
+.errors,
 .flash-messages,
 .flash-messages.error,
 .flash-messages.danger {
@@ -238,14 +243,77 @@ main p a[href="/new-project"]:hover {
     border: 1px solid #f5c6cb;
 }
 
+/* Success Style Override */
 .flash-messages.success {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
 }
 
+/* Hide when empty */
+.errors:empty,
 .flash-messages:empty {
     display: none;
+}
+
+/* Target child elements inside .errors (e.g., lists, paragraphs, links) */
+.errors ul,
+.errors ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.errors li,
+.errors p {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+}
+
+/* Remove hover and state changes on .errors and its children */
+.errors:hover,
+.errors *:hover,
+.errors:focus,
+.errors *:focus,
+.errors:active,
+.errors *:active {
+    transform: none !important;
+    background-color: inherit;
+    border-color: inherit;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    cursor: default;
+}
+
+/* Reset general main ul and main ul li grid rules specifically for error messages */
+main ul.errors {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 0.5rem auto 1.5rem auto;
+    padding: 0.75rem 1.25rem;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    text-align: center;
+}
+
+main ul.errors li {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+    box-shadow: none;
+    transform: none;
+}
+
+main ul.errors li:hover {
+    border-color: transparent;
+    transform: none;
 }
 
 /* Forms */
@@ -816,7 +884,7 @@ main.project-details-page a:hover {
    8. CATEGORIES
    ========================================================================== */
 
-/* Overview Page */
+/* Overview Page Grid */
 main ul.categories-list {
     display: flex;
     flex-wrap: wrap;
@@ -824,13 +892,18 @@ main ul.categories-list {
     justify-content: center;
     max-width: 1150px;
     margin: 0 auto;
+    align-items: stretch;
+    /* Cards in the same row stretch to equal height */
 }
 
+/* Category Card Layout Fix */
 main ul.categories-list>li.category-card {
     width: calc(50% - 0.75rem);
     text-align: left;
-    align-items: stretch;
-    justify-content: flex-start;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box;
 }
 
 main ul.categories-list h2 a,
@@ -1001,6 +1074,77 @@ main.category-details-page p.no-projects {
     color: var(--text-light);
     font-style: italic;
     text-align: left;
+}
+
+/* Category Actions & Buttons */
+.category-card .category-actions {
+    margin-top: auto !important;
+    /* Pushes button wrapper down to the bottom */
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    /* Align button to bottom-right */
+    width: 100%;
+}
+
+.category-card .edit-link,
+.category-card .edit-link:link,
+.category-card .edit-link:visited {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: var(--border-color);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.category-card .edit-link:hover {
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+main>.actions {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+main>.actions .btn-primary,
+main>.actions .btn-primary:link,
+main>.actions .btn-primary:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+main>.actions .btn-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 

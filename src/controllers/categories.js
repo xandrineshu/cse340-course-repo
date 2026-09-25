@@ -1,8 +1,15 @@
 // Import model functions
-import { getAllCategories, getCategoryDetails, getCategoriesForProject, updateCategoryAssignments } from '../models/categories.js';
+import {
+    getAllCategories,
+    getCategoryDetails,
+    getCategoryById,
+    addCategory,
+    updateCategory,
+    getCategoriesForProject,
+    updateCategoryAssignments
+} from '../models/categories.js';
 import { getProjectsByCategory, getProjectDetails } from '../models/projects.js';
 
-// Define controller functions
 const showCategoriesPage = async (req, res, next) => {
     try {
         const categories = await getAllCategories();
@@ -37,6 +44,106 @@ const showCategoryDetailsPage = async (req, res, next) => {
     }
 };
 
+// Render form to create new category
+const showNewCategoryForm = (req, res) => {
+    res.render('new-category', {
+        title: 'New Category',
+        errors: [],
+        name: ''
+    });
+};
+
+// Process submission for creating new category
+const processNewCategoryForm = async (req, res, next) => {
+    try {
+        const name = req.body.name ? req.body.name.trim() : '';
+        const errors = [];
+
+        // Server-side validation: presence, min 3 chars, max 100 chars
+        if (!name) {
+            errors.push('Category name is required.');
+        } else if (name.length < 3) {
+            errors.push('Category name must be at least 3 characters long.');
+        } else if (name.length > 100) {
+            errors.push('Category name must not exceed 100 characters.');
+        }
+
+        if (errors.length > 0) {
+            return res.render('new-category', {
+                title: 'New Category',
+                errors,
+                name
+            });
+        }
+
+        await addCategory(name);
+
+        // Add success flash message
+        req.flash('success', 'Category created successfully.');
+
+        res.redirect('/categories');
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Render form to edit existing category
+const showEditCategoryForm = async (req, res, next) => {
+    try {
+        const categoryId = req.params.id;
+        const category = await getCategoryById(categoryId);
+
+        if (!category) {
+            const err = new Error('Category Not Found');
+            err.status = 404;
+            return next(err);
+        }
+
+        res.render('edit-category', {
+            title: 'Edit Category',
+            errors: [],
+            category
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Process submission for updating category
+const processEditCategoryForm = async (req, res, next) => {
+    try {
+        const categoryId = req.params.id;
+        const name = req.body.name ? req.body.name.trim() : '';
+        const errors = [];
+
+        // Server-side validation: presence, min 3 chars, max 100 chars
+        if (!name) {
+            errors.push('Category name is required.');
+        } else if (name.length < 3) {
+            errors.push('Category name must be at least 3 characters long.');
+        } else if (name.length > 100) {
+            errors.push('Category name must not exceed 100 characters.');
+        }
+
+        if (errors.length > 0) {
+            return res.render('edit-category', {
+                title: 'Edit Category',
+                errors,
+                category: { category_id: categoryId, name }
+            });
+        }
+
+        await updateCategory(categoryId, name);
+
+        // Add success flash message
+        req.flash('success', 'Category updated successfully.');
+
+        res.redirect('/categories');
+    } catch (error) {
+        next(error);
+    }
+};
+
 const showAssignCategoriesForm = async (req, res, next) => {
     try {
         const projectId = req.params.projectId;
@@ -58,7 +165,6 @@ const processAssignCategoriesForm = async (req, res, next) => {
         const projectId = req.params.projectId;
         const selectedCategoryIds = req.body.categoryIds || [];
 
-        // Ensure selectedCategoryIds is an array
         const categoryIdsArray = Array.isArray(selectedCategoryIds) ? selectedCategoryIds : [selectedCategoryIds];
         await updateCategoryAssignments(projectId, categoryIdsArray);
         req.flash('success', 'Categories updated successfully.');
@@ -69,4 +175,13 @@ const processAssignCategoriesForm = async (req, res, next) => {
 };
 
 // Export controller functions
-export { showCategoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm };
+export {
+    showCategoriesPage,
+    showCategoryDetailsPage,
+    showNewCategoryForm,
+    processNewCategoryForm,
+    showEditCategoryForm,
+    processEditCategoryForm,
+    showAssignCategoriesForm,
+    processAssignCategoriesForm
+};

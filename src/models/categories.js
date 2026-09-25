@@ -53,7 +53,7 @@ export const getAllCategories = async () => {
 };
 
 /**
- * Retrieves a single category by its ID.
+ * Retrieves a single category by its ID (including associated projects).
  */
 export const getCategoryDetails = async (id) => {
     const query = `
@@ -62,6 +62,46 @@ export const getCategoryDetails = async (id) => {
         WHERE category_id = $1;
     `;
     const result = await pool.query(query, [id]);
+    return result.rows[0];
+};
+
+/**
+ * Retrieves a single category by its ID (for editing form).
+ */
+export const getCategoryById = async (id) => {
+    const query = `
+        SELECT category_id, name
+        FROM public.category
+        WHERE category_id = $1;
+    `;
+    const result = await pool.query(query, [id]);
+    return result.rows[0];
+};
+
+/**
+ * Inserts a new category into the database.
+ */
+export const addCategory = async (name) => {
+    const query = `
+        INSERT INTO public.category (name)
+        VALUES ($1)
+        RETURNING *;
+    `;
+    const result = await pool.query(query, [name]);
+    return result.rows[0];
+};
+
+/**
+ * Updates an existing category name by ID.
+ */
+export const updateCategory = async (id, name) => {
+    const query = `
+        UPDATE public.category
+        SET name = $1
+        WHERE category_id = $2
+        RETURNING *;
+    `;
+    const result = await pool.query(query, [name, id]);
     return result.rows[0];
 };
 

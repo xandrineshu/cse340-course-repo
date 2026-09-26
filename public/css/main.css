@@ -1175,10 +1175,7 @@ main>.actions .btn-primary:hover {
         flex: 0 0 auto;
     }
 
-    .hero-content {
-        text-align: center;
-    }
-
+    .hero-content,
     .hero-title,
     .hero-subtitle {
         text-align: center;
@@ -1193,12 +1190,16 @@ main>.actions .btn-primary:hover {
     }
 
     .feature-card {
-        width: 100%;
+        width: 80%;
+        /* Centered feature cards */
+        margin: 0 auto;
     }
 }
 
 /* Mobile Devices (700px and below) */
 @media only screen and (max-width: 700px) {
+
+    /* Navigation & Main Layout */
     nav ul {
         flex-direction: column;
     }
@@ -1212,49 +1213,98 @@ main>.actions .btn-primary:hover {
 
     main {
         padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     h1 {
         font-size: 1.75rem;
         margin-bottom: 1.5rem;
+        text-align: center;
     }
 
     main form {
         padding: 1.5rem;
+        width: 80%;
+        margin: 0 auto;
     }
 
+    /* Standard Card Containers Centering (Project, Org, Category) */
+    .project-card-container,
+    .org-card,
+    .category-details-card {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    /* General List & Card Overrides */
     main ul li,
     main ul.projects-list li.project-card,
-    main ul.category-projects-list li.category-project-item,
-    main ul.org-projects-list li.org-project-item,
+    main ul.category-projects-list li.category-project-item {
+        width: 80%;
+        /* Fills the centered parent card container */
+        box-sizing: border-box;
+    }
+
+    main ul.categories-list,
+    main ul.projects-list,
+    main ul li img {
+        width: 80%;
+        max-width: 80%;
+    }
+
+    main ul.category-projects-list li.category-project-item {
+        padding: 1rem;
+    }
+
+    /* Project Details Page - Date & Location Side-by-Side */
+    .project-info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        width: 100%;
+    }
+
     .project-info-grid .info-item {
         width: 100%;
     }
 
-    main ul li img {
-        max-width: 50%;
+    .project-info-grid .info-item.full-width,
+    .project-info-grid .project-actions {
+        grid-column: 1 / -1;
+        width: 100%;
     }
 
-    .category-details-card,
-    .project-card-container {
-        padding: 1.5rem;
+    /* Organization Details Page - 2 Column Mobile Layout */
+    main ul.org-projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0;
+        list-style: none;
     }
 
-    main ul.category-projects-list li.category-project-item,
     main ul.org-projects-list li.org-project-item {
+        width: 100%;
         padding: 1rem;
+        box-sizing: border-box;
     }
 
     /* Org Card Mobile Layout */
     .org-card {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem 1rem;
         gap: 1rem;
     }
 
     .org-card img.org-logo {
         max-width: 140px;
+        margin: 0 auto;
     }
 
     .org-card-content {

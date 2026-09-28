@@ -1,13 +1,5 @@
 // Import model functions
-import {
-    getAllCategories,
-    getCategoryDetails,
-    getCategoryById,
-    addCategory,
-    updateCategory,
-    getCategoriesForProject,
-    updateCategoryAssignments
-} from '../models/categories.js';
+import { getAllCategories, getCategoryDetails, getCategoryById, addCategory, updateCategory, getCategoriesForProject, updateCategoryAssignments } from '../models/categories.js';
 import { getProjectsByCategory, getProjectDetails } from '../models/projects.js';
 
 const showCategoriesPage = async (req, res, next) => {

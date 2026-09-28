@@ -1,4 +1,3 @@
-
 // Define any controller functions
 
 // Test route for 500 errors

@@ -224,7 +224,6 @@ main p a[href="/new-project"]:hover {
     width: 90%;
     max-width: 800px;
     margin: 1.5rem auto 0 auto;
-    /* Gives clean, uniform spacing under navbar across all views */
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     text-align: center;
@@ -448,7 +447,7 @@ main form button[type="submit"]:hover {
 
 
 /* ==========================================================================
-   5. HOME PAGE
+   5. HOME PAGE & HERO SECTION
    ========================================================================== */
 
 main.home-page {
@@ -456,26 +455,17 @@ main.home-page {
     margin: 0 auto;
 }
 
+/* Modern Card Layout Hero */
 .hero-container {
     display: flex;
     align-items: center;
-    gap: 3rem;
-    padding: 2rem 0 3rem 0;
-}
-
-.hero-logo-box {
-    flex: 0 0 300px;
-    display: flex;
-    justify-content: center;
-}
-
-img.main-logo {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: none;
-    margin: 0;
+    gap: 3.5rem;
+    padding: 3rem 2.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    margin-bottom: 2.5rem;
 }
 
 .hero-content {
@@ -483,18 +473,33 @@ img.main-logo {
     text-align: left;
 }
 
+.hero-eyebrow {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background-color: rgba(44, 122, 123, 0.08);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
 .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
+    line-height: 1.2;
     margin-bottom: 1rem;
     color: var(--primary-color);
     text-align: left;
+    font-weight: 800;
 }
 
 .hero-subtitle {
     font-size: 1.15rem;
     color: var(--text-light);
     line-height: 1.7;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
     text-align: left;
 }
 
@@ -520,19 +525,44 @@ img.main-logo {
 }
 
 .hero-cta .btn-secondary {
-    background-color: var(--accent-color);
-    color: #ffffff;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    border: 1px solid var(--border-dark);
 }
 
 .hero-cta .btn-secondary:hover {
     background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #ffffff;
 }
 
+.hero-logo-box {
+    flex: 0 0 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+img.main-logo {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: none;
+    margin: 0;
+    object-fit: contain;
+}
+
+/* Features Grid */
 .features-grid {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .feature-card {
@@ -893,7 +923,6 @@ main ul.categories-list {
     max-width: 1150px;
     margin: 0 auto;
     align-items: stretch;
-    /* Cards in the same row stretch to equal height */
 }
 
 /* Category Card Layout Fix */
@@ -1079,11 +1108,9 @@ main.category-details-page p.no-projects {
 /* Category Actions & Buttons */
 .category-card .category-actions {
     margin-top: auto !important;
-    /* Pushes button wrapper down to the bottom */
     padding-top: 1.5rem;
     display: flex;
     justify-content: flex-end;
-    /* Align button to bottom-right */
     width: 100%;
 }
 
@@ -1166,13 +1193,16 @@ main>.actions .btn-primary:hover {
 /* Medium Tablets (850px and below) */
 @media only screen and (max-width: 850px) {
     .hero-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         text-align: center;
         gap: 2rem;
+        padding: 2rem 1.5rem;
     }
 
     .hero-logo-box {
         flex: 0 0 auto;
+        width: 100%;
+        max-width: 220px;
     }
 
     .hero-content,
@@ -1190,8 +1220,7 @@ main>.actions .btn-primary:hover {
     }
 
     .feature-card {
-        width: 80%;
-        /* Centered feature cards */
+        width: 100%;
         margin: 0 auto;
     }
 }
@@ -1226,7 +1255,7 @@ main>.actions .btn-primary:hover {
 
     main form {
         padding: 1.5rem;
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -1234,7 +1263,7 @@ main>.actions .btn-primary:hover {
     .project-card-container,
     .org-card,
     .category-details-card {
-        width: 80%;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         padding: 1.5rem;
@@ -1245,16 +1274,15 @@ main>.actions .btn-primary:hover {
     main ul li,
     main ul.projects-list li.project-card,
     main ul.category-projects-list li.category-project-item {
-        width: 80%;
-        /* Fills the centered parent card container */
+        width: 100%;
         box-sizing: border-box;
     }
 
     main ul.categories-list,
     main ul.projects-list,
     main ul li img {
-        width: 80%;
-        max-width: 80%;
+        width: 100%;
+        max-width: 100%;
     }
 
     main ul.category-projects-list li.category-project-item {

@@ -12,12 +12,38 @@
 
 <body>
     <nav>
+        <!-- Hidden checkbox for toggle -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    
+        <!-- Mobile Header Bar (Visible only on mobile screens) -->
+        <div class="nav-mobile-bar">
+            <label for="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="nav-mobile-auth">
+                <% if (isLoggedIn) { %>
+                    <a href="/logout">Logout</a>
+                    <% } else { %>
+                        <a href="/register">Register</a>
+                        <a href="/login">Login</a>
+                        <% } %>
+            </div>
+        </div>
+    
+        <!-- Main Navigation List -->
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/organizations">Organizations</a></li>
             <li><a href="/projects">Projects</a></li>
             <li><a href="/categories">Categories</a></li>
-            <li><a href="/register">Register</a></li>
+            <% if (isLoggedIn) { %>
+                <li class="desktop-auth-item"><a href="/logout">Logout</a></li>
+                <% } else { %>
+                    <li class="desktop-auth-item"><a href="/register">Register</a></li>
+                    <li class="desktop-auth-item"><a href="/login">Login</a></li>
+                    <% } %>
         </ul>
     </nav>
 

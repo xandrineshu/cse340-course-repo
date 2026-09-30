@@ -1179,24 +1179,28 @@ main>.actions .btn-primary:hover {
    9. RESPONSIVE MEDIA QUERIES
    ========================================================================== */
 
-/* Laptops & Tablets (1024px and below) */
-@media only screen and (max-width: 1024px) {
+/* Laptops & Tablets (1025px and below) */
+@media only screen and (max-width: 1025px) {
     main ul li {
         width: calc(50% - 1.25rem);
     }
 
     main ul.categories-list>li.category-card {
-        width: 100%;
+        width: 85%;
+        margin: 0 auto;
     }
 }
 
-/* Medium Tablets (850px and below) */
-@media only screen and (max-width: 850px) {
+/* Medium Tablets (860px and below) */
+@media only screen and (max-width: 860px) {
     .hero-container {
         flex-direction: column-reverse;
         text-align: center;
         gap: 2rem;
         padding: 2rem 1.5rem;
+        width: 85%;
+        margin: 0 auto;
+        margin-bottom: 3rem;
     }
 
     .hero-logo-box {
@@ -1217,16 +1221,18 @@ main>.actions .btn-primary:hover {
 
     .features-grid {
         flex-direction: column;
+        width: 85%;
+        margin: 0 auto;
     }
 
     .feature-card {
-        width: 100%;
+        width: 85%;
         margin: 0 auto;
     }
 }
 
-/* Mobile Devices (700px and below) */
-@media only screen and (max-width: 700px) {
+/* Mobile Devices (770px and below) */
+@media only screen and (max-width: 770px) {
 
     /* Navigation & Main Layout */
     nav ul {
@@ -1255,15 +1261,16 @@ main>.actions .btn-primary:hover {
 
     main form {
         padding: 1.5rem;
-        width: 100%;
+        width: 85%;
         margin: 0 auto;
+        box-sizing: border-box;
     }
 
     /* Standard Card Containers Centering (Project, Org, Category) */
     .project-card-container,
     .org-card,
     .category-details-card {
-        width: 100%;
+        width: 85%;
         margin-left: auto;
         margin-right: auto;
         padding: 1.5rem;
@@ -1273,13 +1280,23 @@ main>.actions .btn-primary:hover {
     /* General List & Card Overrides */
     main ul li,
     main ul.projects-list li.project-card,
+    main ul.organizations-list li,
     main ul.category-projects-list li.category-project-item {
-        width: 100%;
+        width: 85%;
         box-sizing: border-box;
     }
 
+    /* Primary List Containers (80% Width Centered) */
     main ul.categories-list,
     main ul.projects-list,
+    main ul.organizations-list {
+        width: 85%;
+        max-width: 85%;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+    }
+
     main ul li img {
         width: 100%;
         max-width: 100%;
@@ -1312,7 +1329,7 @@ main>.actions .btn-primary:hover {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
-        width: 100%;
+        width: 85%;
         padding: 0;
         list-style: none;
     }

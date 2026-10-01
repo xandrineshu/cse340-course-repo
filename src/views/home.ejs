@@ -47,6 +47,10 @@
                 <p>Join hands with fellow community members and make a lasting difference.</p>
             </div>
         </section>
+
+        <% if (isLoggedIn) { %>
+            <p><a href="/dashboard">My Dashboard</a></p>
+            <% } %>
     </main>
 
     <%- include('partials/footer') %>

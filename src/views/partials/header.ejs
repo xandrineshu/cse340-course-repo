@@ -12,7 +12,7 @@
 
 <body>
     <nav>
-        <!-- Hidden checkbox for toggle -->
+        <!-- Hidden checkbox for mobile toggle -->
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
     
         <!-- Mobile Header Bar (Visible only on mobile screens) -->
@@ -25,26 +25,32 @@
             <div class="nav-mobile-auth">
                 <% if (isLoggedIn) { %>
                     <a href="/logout">Logout</a>
-                    <% } else { %>
-                        <a href="/register">Register</a>
-                        <a href="/login">Login</a>
-                        <% } %>
+                <% } else { %>
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                <% } %>
             </div>
         </div>
     
-        <!-- Main Navigation List -->
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/categories">Categories</a></li>
-            <% if (isLoggedIn) { %>
-                <li class="desktop-auth-item"><a href="/logout">Logout</a></li>
+        <!-- Desktop Navigation Bar Container -->
+        <% const current = typeof currentPath !== 'undefined' ? currentPath : ''; %>
+        <div class="nav-container">
+            <ul class="nav-main">
+                <li><a href="/" class="<%= current === '/' ? 'active' : '' %>">Home</a></li>
+                <li><a href="/organizations" class="<%= current.startsWith('/organizations') ? 'active' : '' %>">Organizations</a></li>
+                <li><a href="/projects" class="<%= current.startsWith('/projects') ? 'active' : '' %>">Projects</a></li>
+                <li><a href="/categories" class="<%= current.startsWith('/categories') ? 'active' : '' %>">Categories</a></li>
+            </ul>
+
+            <ul class="nav-auth">
+                <% if (isLoggedIn) { %>
+                    <li><a href="/logout" class="btn-nav btn-nav-secondary">Logout</a></li>
                 <% } else { %>
-                    <li class="desktop-auth-item"><a href="/register">Register</a></li>
-                    <li class="desktop-auth-item"><a href="/login">Login</a></li>
-                    <% } %>
-        </ul>
+                    <li><a href="/register" class="btn-nav btn-nav-secondary">Register</a></li>
+                    <li><a href="/login" class="btn-nav btn-nav-primary">Login</a></li>
+                <% } %>
+            </ul>
+        </div>
     </nav>
 
     <% const messages=flash(); %>

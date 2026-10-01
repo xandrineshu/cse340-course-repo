@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET || 'secret-key';
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
@@ -32,14 +32,14 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 /**
-  * Configure Express middleware
-  */
+ * Configure Express session & flash middleware (MUST BE IN THIS ORDER)
+ */
 
-// Use flash message middleware
-app.use(flash);
-
-// Set up session management
+// 1. Set up session management FIRST so req.session is initialized
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -47,24 +47,20 @@ app.use(session({
     cookie: { maxAge: 60 * 60 * 1000 } // Session expires after 1 hour of inactivity
 }));
 
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+// 2. Use flash message middleware SECOND (it relies on req.session)
+app.use(flash);
 
-// Middleware to log all incoming requests
+// 3. Middleware to log all incoming requests (optional)
 app.use((req, res, next) => {
     if (NODE_ENV === 'development') {
         console.log(`${req.method} ${req.url}`);
     }
-    next(); // Pass control to the next middleware or route
+    next();
 });
 
-// Middleware to make NODE_ENV available to all templates (updated)
+// 4. Middleware to set template variables (req.session is now available)
 app.use((req, res, next) => {
-    res.locals.isLoggedIn = false;
-    if (req.session && req.session.user) {
-        res.locals.isLoggedIn = true;
-    }
-
+    res.locals.isLoggedIn = !!(req.session && req.session.user);
     res.locals.NODE_ENV = NODE_ENV;
     next();
 });
@@ -100,7 +96,6 @@ app.use((err, req, res, next) => {
     res.status(status).render(`errors/${template}`, context);
 });
 
-
 app.listen(PORT, async () => {
     try {
         await testConnection();
@@ -110,4 +105,3 @@ app.listen(PORT, async () => {
         console.error('Error connecting to the database:', error);
     }
 });
-

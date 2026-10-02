@@ -24,7 +24,7 @@
             </label>
             <div class="nav-mobile-auth">
                 <% if (isLoggedIn) { %>
-                    <a href="/logout">Logout</a>
+                    <a href="/logout" class="logout-trigger">Logout</a>
                 <% } else { %>
                     <a href="/register">Register</a>
                     <a href="/login">Login</a>
@@ -37,14 +37,23 @@
         <div class="nav-container">
             <ul class="nav-main">
                 <li><a href="/" class="<%= current === '/' ? 'active' : '' %>">Home</a></li>
-                <li><a href="/organizations" class="<%= current.startsWith('/organizations') ? 'active' : '' %>">Organizations</a></li>
+                <li><a href="/organizations" class="<%= current.startsWith('/organizations') ? 'active' : '' %>">Organizations</a>
+                </li>
                 <li><a href="/projects" class="<%= current.startsWith('/projects') ? 'active' : '' %>">Projects</a></li>
                 <li><a href="/categories" class="<%= current.startsWith('/categories') ? 'active' : '' %>">Categories</a></li>
+            
+                <% if (typeof isLoggedIn !=='undefined' && isLoggedIn) { %>
+                    <li><a href="/dashboard" class="<%= current === '/dashboard' ? 'active' : '' %>">Dashboard</a></li>
+                <% } %>
+            
+                <% if (typeof user !=='undefined' && user && user.role_name==='admin' ) { %>
+                    <li><a href="/users" class="<%= current === '/users' ? 'active' : '' %>">Manage Users</a></li>
+                <% } %>
             </ul>
 
             <ul class="nav-auth">
                 <% if (isLoggedIn) { %>
-                    <li><a href="/logout" class="btn-nav btn-nav-secondary">Logout</a></li>
+                    <li><a href="/logout" class="btn-nav btn-nav-secondary logout-trigger">Logout</a></li>
                 <% } else { %>
                     <li><a href="/register" class="btn-nav btn-nav-secondary">Register</a></li>
                     <li><a href="/login" class="btn-nav btn-nav-primary">Login</a></li>
@@ -77,4 +86,48 @@
                 </p>
             <% }); %>
         </div>
+    <% } %>
+
+    <!-- Logout Confirmation Modal -->
+    <% if (isLoggedIn) { %>
+        <div id="logout-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-card">
+                <h3>Confirm Logout</h3>
+                <p>Are you sure you want to log out?</p>
+                <div class="modal-actions">
+                    <button id="cancel-logout" class="btn btn-secondary">Cancel</button>
+                    <a href="/logout" class="btn btn-danger">Log Out</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const logoutTriggers = document.querySelectorAll('.logout-trigger');
+                const logoutModal = document.getElementById('logout-modal');
+                const cancelBtn = document.getElementById('cancel-logout');
+
+                if (logoutModal && cancelBtn) {
+                    // Open modal when clicking any logout link
+                    logoutTriggers.forEach(trigger => {
+                        trigger.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            logoutModal.style.display = 'flex';
+                        });
+                    });
+
+                    // Hide modal when clicking cancel
+                    cancelBtn.addEventListener('click', () => {
+                        logoutModal.style.display = 'none';
+                    });
+
+                    // Hide modal when clicking backdrop area
+                    logoutModal.addEventListener('click', (e) => {
+                        if (e.target === logoutModal) {
+                            logoutModal.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        </script>
     <% } %>

@@ -1,21 +1,24 @@
 <%- include('partials/header') %>
 
-    <main class="dashboard-page">
-        <h1>
-            <%= title %>
-        </h1>
+<main class="dashboard-page">
+    <h1><%= title %></h1>
 
-        <div class="dashboard-card">
-            <h2>My Profile 👤</h2>
-            <div class="dashboard-details">
-                <p><strong>🏷️ Name:</strong>
-                    <%= name %>
-                </p>
-                <p><strong>📧 Email:</strong>
-                    <%= email %>
-                </p>
-            </div>
-        </div>
-    </main>
+    <div class="dashboard-card">
+        <h2>My Profile 👤</h2>
+        <div class="dashboard-details">
+            <p><strong>🏷️ Name:</strong> <%= name %></p>
+            <p><strong>📧 Email:</strong> <%= email %></p>
 
-    <%- include('partials/footer') %>
+            <% if (role_name === 'admin') { %>
+                <div class="admin-tools-row">
+                    <p><strong>🛠️ Admin Tools:</strong></p>
+                    <div class="admin-actions">
+                        <a href="/users" class="btn btn-primary">Manage Registered Users</a>
+                    </div>
+                </div>
+            <% } %>
+        </div>        
+    </div>
+</main>
+
+<%- include('partials/footer') %>

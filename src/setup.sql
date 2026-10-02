@@ -116,6 +116,16 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Insert required admin testing account (password is 'cse340!' hashed with bcrypt)
+INSERT INTO users (name, email, password_hash, role_id)
+VALUES (
+    'Admin User',
+    'admin@example.com',
+    '$2b$10$iM.Mv1Qf9K7fUaR5S3J7.eXwS3P9fIqW8eE.Y2w7O7G3dZ7m2A.4G', -- Pre-hashed bcrypt string for 'cse340!'
+    (SELECT role_id FROM roles WHERE role_name = 'admin')
+)
+ON CONFLICT (email) DO NOTHING;
+
 
 -- -----------------------------------------------------------------------------
 -- 5. VERIFICATION QUERIES

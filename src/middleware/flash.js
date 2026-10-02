@@ -94,4 +94,25 @@ const flash = (req, res, next) => {
     });
 };
 
+/**
+ * Middleware factory to require a specific user role for route access.
+ * Must be placed after authentication middleware (e.g., requireLogin).
+ * 
+ * @param {string} role - The required role (e.g., 'admin')
+ */
+export const requireRole = (role) => {
+    return (req, res, next) => {
+        // Check if user session exists and matches the required role
+        if (req.session && req.session.user && req.session.user.role === role) {
+            return next();
+        }
+
+        // Set an error message using your custom req.flash implementation
+        req.flash('error', 'Unauthorized access: Admin permissions required.');
+
+        // Redirect non-admin users back to the dashboard
+        return res.redirect('/dashboard');
+    };
+};
+
 export default flash;

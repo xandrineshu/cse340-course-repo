@@ -690,7 +690,7 @@ img.main-logo {
 
 /* Logged-In User/Admin Banner (Middle of Home Page) */
 .dashboard-banner {
-    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
     background-color: var(--card-bg);
     border: 1px solid var(--accent-color);
     border-radius: 12px;
@@ -1069,13 +1069,13 @@ main ul.categories-list {
     align-items: stretch;
 }
 
-/* Category Card Layout Fix */
+/* Category Card Layout */
 main ul.categories-list>li.category-card {
     width: calc(50% - 0.75rem);
     text-align: left;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     box-sizing: border-box;
 }
 
@@ -1092,18 +1092,20 @@ main ul.categories-list h2 a:hover {
     text-decoration: none;
 }
 
-/* Projects Grid inside Category Card */
-main ul.projects-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+/* Projects Grid inside Category Card (Forced 2 Columns Across All Views) */
+main ul.categories-list .projects-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     width: 100%;
     margin-top: 1rem;
+    padding: 0;
+    list-style: none;
 }
 
-main ul.projects-list li.project-card {
-    width: calc(50% - 0.375rem);
+/* Force Inner Project Cards to take full width of their grid cell */
+main ul.categories-list .projects-list li.project-card {
+    width: 100%;
     text-align: left;
     align-items: flex-start;
     padding: 0.85rem 1rem;
@@ -1111,6 +1113,7 @@ main ul.projects-list li.project-card {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     box-shadow: none;
+    box-sizing: border-box;
 }
 
 .project-card h3 {
@@ -1361,77 +1364,235 @@ main.dashboard-page {
     color: var(--primary-color);
 }
 
+.admin-tools-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.admin-tools-row .btn {
+    font-size: 1rem;
+    padding: 10px;
+    margin: 0;
+}
+
 
 /* ==========================================================================
-   10. RESPONSIVE MEDIA QUERIES
+   10. LOGOUT CONFIRMATION MODAL POPUP
+   ========================================================================== */
+/* Fullscreen semi-transparent backdrop */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Centered Modal Card */
+.modal-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 85%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px var(--text-light);
+    text-align: center;
+    animation: popupFadeIn 0.2s ease-out;
+}
+
+.modal-card h3 {
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.modal-card p {
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Action Buttons Container */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-actions .btn {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Cancel Button */
+.modal-actions .btn-secondary {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.modal-actions .btn-secondary:hover {
+    background-color: var(--border-color);
+    transform: translateY(-1px);
+}
+
+/* Red Confirm Logout Button */
+.modal-actions .btn-danger {
+    background-color: #e53e3e;
+    color: #ffffff;
+}
+
+.modal-actions .btn-danger:hover {
+    background-color: #c53030;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Pop-in entry animation */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* ==========================================================================
+   11. REGISTERED USERS MANAGEMENT TABLE
+   ========================================================================== */
+main.users-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    width: 100%;
+}
+
+/* Ensure table overrides any generic layout resets */
+table.users-table {
+    display: table !important;
+    /* Forces normal table behavior */
+    width: 100% !important;
+    /* Stretches table across entire card */
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-top: 1.5rem;
+}
+
+table.users-table thead {
+    display: table-header-group !important;
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+table.users-table tbody {
+    display: table-row-group !important;
+}
+
+table.users-table tr {
+    display: table-row !important;
+}
+
+table.users-table th,
+table.users-table td {
+    display: table-cell !important;
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+}
+
+table.users-table th {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+table.users-table td {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Equal column distribution */
+table.users-table th:nth-child(1),
+table.users-table td:nth-child(1) {
+    width: 30%;
+}
+
+table.users-table th:nth-child(2),
+table.users-table td:nth-child(2) {
+    width: 45%;
+}
+
+table.users-table th:nth-child(3),
+table.users-table td:nth-child(3) {
+    width: 25%;
+    text-align: center;
+}
+
+/* Striped rows & hover effect */
+table.users-table tbody tr:nth-child(even) {
+    background-color: var(--bg-color);
+}
+
+table.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table.users-table tbody tr:hover {
+    background-color: rgba(43, 108, 176, 0.05);
+}
+
+/* Role Badges */
+.role-badge {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    border: 1px solid var(--border-dark);
+}
+
+
+/* ==========================================================================
+   12. RESPONSIVE MEDIA QUERIES
    ========================================================================== */
 
-/* Laptops & Tablets */
+/* --------------------------------------------------------------------------
+   1. HAMBURGER NAV & HEADER (Up to 1020px)
+   -------------------------------------------------------------------------- */
 @media only screen and (max-width: 1020px) {
-    main ul li {
-        width: calc(50% - 1.25rem);
-    }
-
-    main ul.categories-list>li.category-card {
-        width: 85%;
-        margin: 0 auto;
-    }
-}
-
-/* Medium Tablets */
-@media only screen and (max-width: 910px) {
-    .hero-container {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 2rem;
-        padding: 2rem 1.5rem;
-        width: 85%;
-        margin: 0 auto;
-        margin-bottom: 3rem;
-    }
-
-    .hero-logo-box {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 220px;
-    }
-
-    .hero-content,
-    .hero-title,
-    .hero-subtitle {
-        text-align: center;
-    }
-
-    .hero-cta {
-        justify-content: center;
-    }
-
-    .features-grid {
-        flex-direction: column;
-        width: 85%;
-        margin: 0 auto;
-    }
-
-    .feature-card {
-        width: 85%;
-        margin: 0 auto;
-    }
-
-    .dashboard-banner {
-        width: 85%;
-        margin: 0 auto;
-        margin-bottom: 2rem;
-    }
-
-    .dashboard-banner-content {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-/* Mobile Devices */
-@media only screen and (max-width: 750px) {
-    /* Mobile Header Bar (Hamburger on left, Auth buttons on right) */
     .nav-mobile-bar {
         display: flex;
         justify-content: space-between;
@@ -1440,7 +1601,6 @@ main.dashboard-page {
         background-color: var(--primary-color);
     }
 
-    /* Mobile Hamburger Toggle Button */
     .nav-toggle-btn {
         display: flex;
         flex-direction: column;
@@ -1459,7 +1619,6 @@ main.dashboard-page {
         transition: all 0.3s ease-in-out;
     }
 
-    /* Right-side Auth Buttons in Mobile Header Bar - Matched with Desktop .btn-nav */
     .nav-mobile-auth {
         display: flex;
         gap: 0.5rem;
@@ -1473,7 +1632,7 @@ main.dashboard-page {
         align-items: center;
         justify-content: center;
         padding: 0.35rem 0.75rem;
-        font-size: 0.8rem;
+        font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
         border-radius: 5px;
@@ -1490,7 +1649,6 @@ main.dashboard-page {
         border-color: #ffffff;
     }
 
-    /* Primary CTA button accent if class .btn-nav-primary is used on mobile */
     .nav-mobile-auth a.btn-nav-primary {
         background-color: var(--secondary-color);
         border-color: var(--secondary-color);
@@ -1503,12 +1661,10 @@ main.dashboard-page {
         color: var(--primary-color);
     }
 
-    /* Hide desktop auth container inside mobile dropdown */
     .nav-auth {
         display: none;
     }
 
-    /* Mobile Dropdown Container */
     .nav-container {
         flex-direction: column;
         width: 100%;
@@ -1525,13 +1681,11 @@ main.dashboard-page {
         box-shadow: 0 5px 8px var(--border-dark);
     }
 
-    /* Show Dropdown Container when toggled/checked */
     .nav-toggle:checked~.nav-container {
         max-height: 400px;
         opacity: 1;
     }
 
-    /* Animate Hamburger lines into an 'X' when open */
     .nav-toggle:checked~.nav-mobile-bar .nav-toggle-btn span:nth-child(1) {
         transform: translateY(8.5px) rotate(45deg);
     }
@@ -1544,7 +1698,6 @@ main.dashboard-page {
         transform: translateY(-8.5px) rotate(-45deg);
     }
 
-    /* Nav List Styling in Mobile View */
     .nav-main {
         flex-direction: column;
         width: 100%;
@@ -1570,8 +1723,300 @@ main.dashboard-page {
     .nav-main li a.active::after {
         display: none;
     }
+}
 
-    /* Navigation & Main Layout */
+/* --------------------------------------------------------------------------
+   2. HOME PAGE HERO & FEATURES (All Mobile & Tablet Screens: Up to 1020px)
+   -------------------------------------------------------------------------- */
+@media only screen and (max-width: 1020px) {
+
+    /* Hero Section - Vertical Stack & 85% Centered */
+    main.home-page .hero-container,
+    main .hero-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+        width: 85%;
+        max-width: 85%;
+        margin: 0 auto 2.5rem auto;
+        box-sizing: border-box;
+    }
+
+    .hero-logo-box {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .hero-logo-box img.main-logo {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .hero-content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+        line-height: 1.25;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-cta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        max-width: 280px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    /* Base Mobile Features Grid (Vertical Stack) */
+    main.home-page .features-grid,
+    main .features-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        width: 85%;
+        max-width: 85%;
+        margin: 0 auto 3rem auto;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .features-grid .feature-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. TABLET ONLY LAYOUT (751px to 1020px)
+   -------------------------------------------------------------------------- */
+@media only screen and (min-width: 751px) and (max-width: 1020px) {
+
+    /* Reset main page wrappers */
+    main,
+    main.category-details-page,
+    main.project-details-page,
+    main.organization-details-page,
+    main .org-details-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding-inline: 0;
+        box-sizing: border-box;
+    }
+
+    /* Hero CTA buttons side-by-side */
+    .hero-cta {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .hero-cta .btn {
+        width: auto;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+        padding-inline: 2rem;
+    }
+
+    /* Standalone Outer Cards Centered at 85% */
+    .project-card-container,
+    .category-details-card,
+    .category-projects-section,
+    .org-card {
+        width: 85%;
+        max-width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+
+    /* --- Service Categories Overview Page --- */
+    ul.categories-list,
+    .categories-container>ul.categories-list {
+        width: 85%;
+        margin: 0 auto 2rem auto;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+    ul.categories-list .category-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .categories-list .category-card .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        padding: 0;
+        margin: 1rem 0 0 0;
+    }
+
+    .categories-list .category-card .projects-list li.project-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* --- Category Details Page (Single Category Page Fix) --- */
+    /* Container grid spans 100% inside the 85% parent card */
+    main.category-details-page ul.category-projects-list,
+    main.category-details-page ul.projects-list,
+    .category-details-card ul.category-projects-list,
+    .category-details-card ul.projects-list,
+    .category-projects-section ul.projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        width: 100%;
+        margin: 1.5rem 0 0 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+    /* Cards expand to full column width */
+    main.category-details-page ul.category-projects-list li,
+    main.category-details-page ul.projects-list li,
+    .category-details-card ul.category-projects-list li,
+    .category-details-card ul.projects-list li,
+    .category-projects-section ul.projects-list li {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    /* --- Organization Details Page --- */
+    main .org-card+h2,
+    main .org-card+h3,
+    main .service-projects-heading,
+    main h2.section-title {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    ul.org-projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        width: 85%;
+        margin: 1rem auto 2rem auto;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+    ul.org-projects-list li,
+    ul.org-projects-list li.org-project-item {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    /* 2-Column Grid for Features */
+    main.home-page .features-grid,
+    main .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        width: 85%;
+        margin: 0 auto 3rem auto;
+    }
+
+    .features-grid .feature-card:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 50%;
+    }
+
+    /* 2-Column Grid for Standalone Organizations and Standalone Projects Lists */
+    ul.organizations-list,
+    ul.upcoming-projects-list,
+    main>ul.projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        width: 85%;
+        margin: 0 auto 2rem auto;
+        padding: 0;
+        list-style: none;
+    }
+
+    ul.organizations-list li,
+    ul.upcoming-projects-list li.upcoming-project-card,
+    main>ul.projects-list li {
+        width: 100%;
+        margin: 0;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Banner & Users Table */
+    .dashboard-banner,
+    main.users-container {
+        width: 85%;
+        margin: 0 auto 2rem auto;
+    }
+
+    .dashboard-banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    table.users-table th,
+    table.users-table td {
+        padding: 0.85rem 1rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. MOBILE ONLY LAYOUT (Up to 750px)
+   -------------------------------------------------------------------------- */
+@media only screen and (max-width: 750px) {
     main {
         padding: 1.5rem 1rem;
         display: flex;
@@ -1585,6 +2030,11 @@ main.dashboard-page {
         text-align: center;
     }
 
+    .hero-title,
+    .hero-subtitle {
+        padding-inline: 2rem;
+    }
+
     main form {
         padding: 1.5rem;
         width: 85%;
@@ -1592,10 +2042,14 @@ main.dashboard-page {
         box-sizing: border-box;
     }
 
-    /* Standard Card Containers Centering (Project, Org, Category) */
+    /* Outer Container Cards (85% Width & Proper Inner Padding) */
     .project-card-container,
+    .category-details-card,
     .org-card,
-    .category-details-card {
+    .organizations-list,
+    ul.upcoming-projects-list,
+    main ul.categories-list,
+    .category-projects-section {
         width: 85%;
         margin-left: auto;
         margin-right: auto;
@@ -1603,24 +2057,57 @@ main.dashboard-page {
         box-sizing: border-box;
     }
 
-    /* General List & Card Overrides */
-    main ul li,
-    main ul.projects-list li.project-card,
-    main ul.organizations-list li,
-    main ul.category-projects-list li.category-project-item {
-        width: 85%;
+    .category-projects-section {
+        padding: 0;
+    }
+
+    .project-card-container {
+        padding: 1.5rem;
+    }
+
+    /* Individual Projects Page Cards */
+    ul.upcoming-projects-list li.upcoming-project-card {
+        width: 100%;
+        padding: 1.5rem;
         box-sizing: border-box;
     }
 
-    /* Primary List Containers (85% Width Centered) */
-    main ul.categories-list,
-    main ul.projects-list,
-    main ul.organizations-list {
-        width: 85%;
-        max-width: 85%;
-        margin: 0 auto;
+    /* Top-Level Category Cards */
+    main ul.categories-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
         padding: 0;
-        list-style: none;
+    }
+
+    main ul.categories-list>li.category-card {
+        width: 100%;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    /* Generic List Elements (Excluding inner grid items and category cards) */
+    main ul li:not(.project-card):not(.category-card):not(.upcoming-project-card),
+    main ul.organizations-list li,
+    main ul.category-projects-list li.category-project-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Inner Projects Grid (Inside Categories Page) */
+    main ul.categories-list .category-card ul.projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0;
+        margin: 1rem 0 0 0;
+        box-sizing: border-box;
+    }
+
+    main ul.categories-list .category-card ul.projects-list li.project-card {
+        width: 100%;
+        box-sizing: border-box;
     }
 
     main ul li img {
@@ -1632,29 +2119,31 @@ main.dashboard-page {
         padding: 1rem;
     }
 
-    /* Project Details Page - Date & Location Side-by-Side */
+    /* Project Info Grid (Date, Location, Partner Org Cards) */
     .project-info-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 0.85rem;
         width: 100%;
+        margin-top: 1rem;
+        box-sizing: border-box;
     }
 
     .project-info-grid .info-item {
         width: 100%;
+        box-sizing: border-box;
     }
 
-    .project-info-grid .info-item.full-width,
-    .project-info-grid .project-actions {
+    .project-info-grid .project-actions,
+    .project-info-grid .info-item.full-width {
         grid-column: 1 / -1;
         width: 100%;
     }
 
-    /* Organization Details Page - 2 Column Mobile Layout */
     main ul.org-projects-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
+        gap: 1rem;
         width: 85%;
         padding: 0;
         list-style: none;
@@ -1666,11 +2155,11 @@ main.dashboard-page {
         box-sizing: border-box;
     }
 
-    /* Org Card Mobile Layout */
     .org-card {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
+        padding: 1.5rem;
     }
 
     .org-card img.org-logo {
@@ -1687,22 +2176,46 @@ main.dashboard-page {
         text-align: center;
     }
 
-    /* Tags Stack */
     .project-categories {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.35rem;
+        gap: 0.5rem;
     }
 
-    /* Dashboard */
     .dashboard-banner {
         width: 85%;
-        margin: 0 auto;
-        margin-bottom: 2rem;
+        margin: 0 auto 2rem auto;
     }
-    
+
     .dashboard-banner-content {
         flex-direction: column;
         text-align: center;
+    }
+
+    .modal-card {
+        width: 85%;
+        padding: 1.5rem 1.5rem;
+        border-radius: 10px;
+    }
+
+    main.users-container {
+        width: 85%;
+        padding: 1rem 0;
+        overflow-x: auto;
+    }
+
+    table.users-table {
+        min-width: 500px;
+    }
+
+    table.users-table th,
+    table.users-table td {
+        padding: 0.75rem 0.85rem;
+        font-size: 0.85rem;
+    }
+
+    .role-badge {
+        padding: 0.25rem 0.6rem;
+        font-size: 0.75rem;
     }
 }

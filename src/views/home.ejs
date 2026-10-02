@@ -1,6 +1,28 @@
 <%- include('partials/header') %>
 
     <main class="home-page">
+        <% if (isLoggedIn) { %>
+            <!-- Dashboard Quick-Access Banner -->
+            <% const isAdminUser=user && user.role_name && user.role_name.toLowerCase()==='admin' ; %>
+                <section class="dashboard-banner <%= isAdminUser ? 'admin-banner' : '' %>">
+                    <div class="dashboard-banner-content">
+                        <% if (isAdminUser) { %>
+                            <span class="dashboard-banner-text">
+                                🛡️️ <strong>Welcome back, <%= user.name || 'Admin' %>!</strong> Ready to manage network
+                                operations and platform resources?
+                            </span>
+                            <a href="/dashboard" class="btn btn-dashboard-sm btn-admin">Admin Dashboard →</a>
+                            <% } else { %>
+                                <span class="dashboard-banner-text">
+                                    👋 <strong>Welcome back, <%= user.name || 'Volunteer' %>!</strong> Ready to continue your
+                                    impact?
+                                </span>
+                                <a href="/dashboard" class="btn btn-dashboard-sm">View Dashboard →</a>
+                                <% } %>
+                    </div>
+                </section>
+            <% } %>
+
         <section class="hero-container">
             <!-- Text & Content Area -->
             <div class="hero-content">
@@ -27,26 +49,6 @@
                 <img class="main-logo" src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
             </div>
         </section>
-
-        <% if (isLoggedIn) { %>
-            <!-- Dashboard Quick-Access Banner -->
-            <% const isAdminUser = user && user.role_name && user.role_name.toLowerCase() === 'admin'; %>
-            <section class="dashboard-banner <%= isAdminUser ? 'admin-banner' : '' %>">
-                <div class="dashboard-banner-content">
-                    <% if (isAdminUser) { %>
-                        <span class="dashboard-banner-text">
-                            🛡️️ <strong>Welcome back, <%= user.name || 'Admin' %>!</strong> Ready to manage network operations and platform resources?
-                        </span>
-                        <a href="/dashboard" class="btn btn-dashboard-sm btn-admin">Admin Dashboard →</a>
-                    <% } else { %>
-                        <span class="dashboard-banner-text">
-                            👋 <strong>Welcome back, <%= user.name || 'Volunteer' %>!</strong> Ready to continue your impact?
-                        </span>
-                        <a href="/dashboard" class="btn btn-dashboard-sm">View Dashboard →</a>
-                    <% } %>
-                </div>
-            </section>
-        <% } %>
 
         <!-- Feature Cards Grid -->
         <section class="features-grid">

@@ -41,6 +41,18 @@ const findUserByEmail = async (email) => {
     return result.rows[0];
 };
 
+// NEW: Function to fetch all registered users along with their roles
+const getAllUsers = async () => {
+    const query = `
+        SELECT u.user_id, u.name, u.email, r.role_name 
+        FROM users u
+        JOIN roles r ON u.role_id = r.role_id
+        ORDER BY u.name ASC
+    `;
+    const result = await db.query(query);
+    return result.rows;
+};
+
 const verifyPassword = async (password, passwordHash) => {
     return bcrypt.compare(password, passwordHash);
 };
@@ -56,10 +68,10 @@ const authenticateUser = async (email, password) => {
 
     if (isMatch) {
         delete user.password_hash;
-        return user; // Now includes role_name on the returned user object
+        return user; // Includes role_name on the returned user object
     }
 
     return null;
 };
 
-export { createUser, authenticateUser, findUserByEmail };
+export { createUser, authenticateUser, findUserByEmail, getAllUsers };

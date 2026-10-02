@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<main class="users-container">
+    <h1>Registered Users</h1>
+
+    <% if (users && users.length > 0) { %>
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>Name 👤</th>
+                    <th>Email 📧</th>
+                    <th>Role 🔰</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td><span class="role-badge"><%= user.role_name %></span></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No registered users found.</p>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>

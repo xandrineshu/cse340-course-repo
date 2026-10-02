@@ -25,9 +25,10 @@ const createUser = async (name, email, passwordHash) => {
 
 const findUserByEmail = async (email) => {
     const query = `
-        SELECT user_id, name, email, password_hash, role_id 
-        FROM users 
-        WHERE email = $1
+        SELECT u.user_id, u.name, u.email, u.password_hash, r.role_name 
+        FROM users u
+        JOIN roles r ON u.role_id = r.role_id
+        WHERE u.email = $1
     `;
     const queryParams = [email];
 
@@ -55,10 +56,10 @@ const authenticateUser = async (email, password) => {
 
     if (isMatch) {
         delete user.password_hash;
-        return user;
+        return user; // Now includes role_name on the returned user object
     }
 
     return null;
 };
 
-export { createUser, authenticateUser };
+export { createUser, authenticateUser, findUserByEmail };

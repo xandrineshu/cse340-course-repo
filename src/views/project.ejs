@@ -55,8 +55,10 @@
                 </div>
 
                 <div class="project-actions">
-                    <a href="/edit-project/<%= project.project_id %>" class="btn btn-primary">✍🏻 Edit Project</a>
-                    <a href="/assign-categories/<%= project.project_id %>" class="btn">✍🏻 Edit Categories</a>
+                    <% if (user && user.role_name==='admin' ) { %>
+                        <a href="/edit-project/<%= project.project_id %>" class="btn btn-primary">✍🏻 Edit Project</a>
+                        <a href="/assign-categories/<%= project.project_id %>" class="btn">✍🏻 Edit Categories</a>
+                    <% } %>
                 </div>
             </div>
         </div>

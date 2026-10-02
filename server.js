@@ -61,6 +61,7 @@ app.use((req, res, next) => {
 // 4. Middleware to set template variables (req.session is now available)
 app.use((req, res, next) => {
     res.locals.isLoggedIn = !!(req.session && req.session.user);
+    res.locals.user = req.session ? req.session.user : null;
     res.locals.NODE_ENV = NODE_ENV;
     next();
 });

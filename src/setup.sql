@@ -140,9 +140,10 @@ SELECT u.user_id, u.name, u.email, r.role_name, r.role_description
 FROM users u
 JOIN roles r ON u.role_id = r.role_id;
 
+
+-- --------------------------------------------------------------------------------------------------------------------------- --
 -- Delete the test user
 DELETE FROM users WHERE email = 'test@example.com';
-
 
 -- If need to delete unnecessary project tests
 -- Step 1: Remove any category connections for project ID
@@ -152,4 +153,16 @@ WHERE project_id = ;
 -- Step 2: Delete project 17
 DELETE FROM public.project 
 WHERE project_id = ;
+
+
+-- --------------------------------------------------------------------------------------------------------------------------- --
+-- Update the dedicated admin testing account to have admin role
+UPDATE users 
+SET role_id = (SELECT role_id FROM roles WHERE role_name = 'admin') 
+WHERE email = 'admin@example.com';
+
+-- Verify the update by listing all users and their roles
+SELECT users.user_id, users.email, roles.role_name 
+FROM users 
+JOIN roles ON users.role_id = roles.role_id;
 

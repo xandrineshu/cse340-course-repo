@@ -15,6 +15,7 @@
                     the world by connecting passionate volunteers with meaningful community opportunities.
                 </p>
 
+                <!-- Static Hero Buttons (Same for all users) -->
                 <div class="hero-cta">
                     <a href="/projects" class="btn btn-primary">Browse Projects →</a>
                     <a href="/organizations" class="btn btn-secondary">Explore Organizations</a>
@@ -27,6 +28,26 @@
             </div>
         </section>
 
+        <% if (isLoggedIn) { %>
+            <!-- Dashboard Quick-Access Banner -->
+            <% const isAdminUser = user && user.role_name && user.role_name.toLowerCase() === 'admin'; %>
+            <section class="dashboard-banner <%= isAdminUser ? 'admin-banner' : '' %>">
+                <div class="dashboard-banner-content">
+                    <% if (isAdminUser) { %>
+                        <span class="dashboard-banner-text">
+                            🛡️️ <strong>Welcome back, <%= user.name || 'Admin' %>!</strong> Ready to manage network operations and platform resources?
+                        </span>
+                        <a href="/dashboard" class="btn btn-dashboard-sm btn-admin">Admin Dashboard →</a>
+                    <% } else { %>
+                        <span class="dashboard-banner-text">
+                            👋 <strong>Welcome back, <%= user.name || 'Volunteer' %>!</strong> Ready to continue your impact?
+                        </span>
+                        <a href="/dashboard" class="btn btn-dashboard-sm">View Dashboard →</a>
+                    <% } %>
+                </div>
+            </section>
+        <% } %>
+
         <!-- Feature Cards Grid -->
         <section class="features-grid">
             <div class="feature-card">
@@ -34,23 +55,19 @@
                 <h3>Find Opportunities</h3>
                 <p>Discover local projects tailored to your passion, skills, and availability.</p>
             </div>
-
+        
             <div class="feature-card">
                 <div class="feature-icon">🏛️</div>
                 <h3>Partner Organizations</h3>
                 <p>Connect with vetted non-profits and institutions making a real impact.</p>
             </div>
-
+        
             <div class="feature-card">
                 <div class="feature-icon">🌱</div>
                 <h3>Make an Impact</h3>
                 <p>Join hands with fellow community members and make a lasting difference.</p>
             </div>
         </section>
-
-        <% if (isLoggedIn) { %>
-            <p><a href="/dashboard">My Dashboard</a></p>
-            <% } %>
     </main>
 
     <%- include('partials/footer') %>

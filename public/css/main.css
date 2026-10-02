@@ -535,7 +535,7 @@ main form button[type="submit"]:hover {
 
 
 /* ==========================================================================
-   5. HOME PAGE & HERO SECTION
+   5. HOME PAGE, DASHBOARD & HERO SECTION
    ========================================================================== */
 
 main.home-page {
@@ -686,6 +686,62 @@ img.main-logo {
     font-size: 0.95rem;
     color: var(--text-light);
     line-height: 1.6;
+}
+
+/* Logged-In User/Admin Banner (Middle of Home Page) */
+.dashboard-banner {
+    margin-top: 2.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 1.25rem 2rem;
+}
+
+.dashboard-banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.dashboard-banner-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.btn-dashboard-sm {
+    background-color: var(--border-dark);
+    color: #ffffff;
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 0;
+    transition: all 0.2s ease;
+}
+
+.btn-dashboard-sm:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Admin Banner Variant */
+.dashboard-banner.admin-banner {
+    border-color: var(--primary-color);
+    background-color: var (--card-bg);
+}
+
+.btn-admin {
+    background-color: var(--border-dark);
+    color: var(--primary-color);
+}
+
+.btn-admin:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
 }
 
 
@@ -1311,7 +1367,7 @@ main.dashboard-page {
    ========================================================================== */
 
 /* Laptops & Tablets */
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1020px) {
     main ul li {
         width: calc(50% - 1.25rem);
     }
@@ -1323,7 +1379,7 @@ main.dashboard-page {
 }
 
 /* Medium Tablets */
-@media only screen and (max-width: 880px) {
+@media only screen and (max-width: 910px) {
     .hero-container {
         flex-direction: column-reverse;
         text-align: center;
@@ -1359,6 +1415,17 @@ main.dashboard-page {
     .feature-card {
         width: 85%;
         margin: 0 auto;
+    }
+
+    .dashboard-banner {
+        width: 85%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+
+    .dashboard-banner-content {
+        flex-direction: column;
+        text-align: center;
     }
 }
 
@@ -1628,9 +1695,14 @@ main.dashboard-page {
     }
 
     /* Dashboard */
-    .dashboard-card {
+    .dashboard-banner {
         width: 85%;
         margin: 0 auto;
-        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .dashboard-banner-content {
+        flex-direction: column;
+        text-align: center;
     }
 }

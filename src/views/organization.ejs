@@ -17,7 +17,9 @@
                     <%= organizationDetails.description %>
                 </p>
                 <p class="org-actions">
-                    <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn">✍🏻 Edit Organization</a>
+                    <% if (user && user.role_name==='admin' ) { %>
+                        <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn">✍🏻 Edit Organization</a>
+                    <% } %>
                 </p>
             </div>
         </div>

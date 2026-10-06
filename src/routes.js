@@ -45,6 +45,11 @@ import {
     showUsersList
 } from './controllers/users.js';
 
+import {
+    signUpVolunteer,
+    cancelVolunteer
+} from './controllers/volunteers.js';
+
 import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
@@ -90,11 +95,15 @@ router.post('/edit-organization/:id', requireRole('admin'), organizationValidati
 
 
 // ==========================================
-// PROJECTS ROUTES
+// PROJECTS ROUTES & VOLUNTEER ACTIONS
 // ==========================================
 // User View
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
+
+// Protected Volunteer Actions
+router.post('/project/:id/volunteer', requireLogin, signUpVolunteer);
+router.post('/project/:id/unvolunteer', requireLogin, cancelVolunteer);
 
 // Admin Management
 router.get('/new-project', requireRole('admin'), showNewProjectForm);

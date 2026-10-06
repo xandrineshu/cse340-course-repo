@@ -128,7 +128,26 @@ ON CONFLICT (email) DO NOTHING;
 
 
 -- -----------------------------------------------------------------------------
--- 5. VERIFICATION QUERIES
+-- 5. PROJECT VOLUNTEERS TABLE
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS project_volunteers (
+    user_id INT NOT NULL,
+    project_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, project_id),
+    CONSTRAINT fk_volunteer_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id)
+        REFERENCES project(project_id)
+        ON DELETE CASCADE
+);
+
+
+-- -----------------------------------------------------------------------------
+-- 6. VERIFICATION QUERIES
 -- -----------------------------------------------------------------------------
 SELECT * FROM organization;
 SELECT * FROM project;
@@ -136,10 +155,11 @@ SELECT * FROM category;
 SELECT * FROM project_category;
 SELECT * FROM roles;
 SELECT * FROM users;
+SELECT * FROM project_volunteers;
 
 
 -- -----------------------------------------------------------------------------
--- 6. TESTS
+-- 7. TESTS
 -- -----------------------------------------------------------------------------
 -- Insert a test user
 INSERT INTO users (name, email, password_hash, role_id) 

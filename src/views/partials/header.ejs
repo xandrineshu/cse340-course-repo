@@ -8,6 +8,7 @@
         <%= title %>
     </title>
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/modals.js" defer></script>
 </head>
 
 <body>
@@ -95,39 +96,9 @@
                 <h3>Confirm Logout</h3>
                 <p>Are you sure you want to log out?</p>
                 <div class="modal-actions">
-                    <button id="cancel-logout" class="btn btn-secondary">Cancel</button>
+                    <button type="button" id="cancel-logout" class="btn btn-secondary">Cancel</button>
                     <a href="/logout" class="btn btn-danger">Log Out</a>
                 </div>
             </div>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const logoutTriggers = document.querySelectorAll('.logout-trigger');
-                const logoutModal = document.getElementById('logout-modal');
-                const cancelBtn = document.getElementById('cancel-logout');
-
-                if (logoutModal && cancelBtn) {
-                    // Open modal when clicking any logout link
-                    logoutTriggers.forEach(trigger => {
-                        trigger.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            logoutModal.style.display = 'flex';
-                        });
-                    });
-
-                    // Hide modal when clicking cancel
-                    cancelBtn.addEventListener('click', () => {
-                        logoutModal.style.display = 'none';
-                    });
-
-                    // Hide modal when clicking backdrop area
-                    logoutModal.addEventListener('click', (e) => {
-                        if (e.target === logoutModal) {
-                            logoutModal.style.display = 'none';
-                        }
-                    });
-                }
-            });
-        </script>
     <% } %>

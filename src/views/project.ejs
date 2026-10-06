@@ -1,67 +1,108 @@
 <%- include('partials/header') %>
 
-    <main class="project-details-page">
-        <h1>Project Details</h1>
+<main class="project-details-page">
+    <h1>Project Details</h1>
 
-        <div class="project-card-container">
-            <h2 class="project-title">
-                <%= project.title %>
-            </h2>
+    <div class="project-card-container">
+        <h2 class="project-title">
+            <%= project.title %>
+        </h2>
 
-            <div class="project-description-box">
-                <p>
-                    <%= project.description %>
-                </p>
-            </div>
+        <div class="project-description-box">
+            <p>
+                <%= project.description %>
+            </p>
+        </div>
 
-            <!-- Category Tags Section -->
-            <div class="project-categories">
-                <span class="info-label">🗂️ Categories:</span>
-                <div class="tags-container">
-                    <% if (typeof categories !=='undefined' && categories && categories.length> 0) { %>
-                        <% categories.forEach(function(category) { %>
-                            <a href="/category/<%= category.category_id %>" class="category-tag">
-                                <%= category.name %>
-                            </a>
-                            <% }); %>
-                                <% } else { %>
-                                    <span class="no-tags">Uncategorized</span>
-                                    <% } %>
-                </div>
-            </div>
-
-            <div class="project-info-grid">
-                <div class="info-item">
-                    <span class="info-label">📅 Date</span>
-                    <span class="info-value">
-                        <%= project.date ? new Date(project.date).toLocaleDateString() : 'TBD' %>
-                    </span>
-                </div>
-
-                <div class="info-item">
-                    <span class="info-label">📍 Location</span>
-                    <span class="info-value">
-                        <%= project.location %>
-                    </span>
-                </div>
-
-                <div class="info-item full-width">
-                    <span class="info-label">🏛️ Partner Organization</span>
-                    <span class="info-value">
-                        <a href="/organization/<%= project.organization_id %>">
-                            <%= project.organization_name %>
+        <!-- Category Tags Section -->
+        <div class="project-categories">
+            <span class="info-label">🗂 Categories:</span>
+            <div class="tags-container">
+                <% if (typeof categories !== 'undefined' && categories && categories.length > 0) { %>
+                    <% categories.forEach(function(category) { %>
+                        <a href="/category/<%= category.category_id %>" class="category-tag">
+                            <%= category.name %>
                         </a>
-                    </span>
-                </div>
-
-                <div class="project-actions">
-                    <% if (user && user.role_name==='admin' ) { %>
-                        <a href="/edit-project/<%= project.project_id %>" class="btn btn-primary">✍🏻 Edit Project</a>
-                        <a href="/assign-categories/<%= project.project_id %>" class="btn">✍🏻 Edit Categories</a>
-                    <% } %>
-                </div>
+                    <% }); %>
+                <% } else { %>
+                    <span class="no-tags">Uncategorized</span>
+                <% } %>
             </div>
         </div>
-    </main>
 
-    <%- include('partials/footer') %>
+        <div class="project-info-grid">
+            <div class="info-item">
+                <span class="info-label">📅 Date</span>
+                <span class="info-value">
+                    <%= project.date ? new Date(project.date).toLocaleDateString() : 'TBD' %>
+                </span>
+            </div>
+        
+            <div class="info-item">
+                <span class="info-label">📍 Location</span>
+                <span class="info-value">
+                    <%= project.location %>
+                </span>
+            </div>
+        
+            <div class="info-item full-width">
+                <span class="info-label">🏛️ Partner Organization</span>
+                <span class="info-value">
+                    <a href="/organization/<%= project.organization_id %>">
+                        <%= project.organization_name %>
+                    </a>
+                </span>
+            </div>
+        
+            <% if (typeof user !== 'undefined' && user && user.role_name === 'admin') { %>
+                <div class="project-actions">
+                    <a href="/edit-project/<%= project.project_id %>" class="btn btn-primary">✍🏻 Edit Project</a>
+                    <a href="/assign-categories/<%= project.project_id %>" class="btn">✍🏻 Edit Categories</a>
+                </div>
+            <% } %>
+        </div>
+        
+        <!-- Volunteer Sign-Up Section -->
+        <div class="volunteer-section">
+            <h3>🙋 Volunteer Status</h3>
+
+            <% if (typeof user !== 'undefined' && user) { %>
+                <% if (typeof isVolunteering !== 'undefined' && isVolunteering) { %>
+                    <form id="unvolunteer-form" action="/project/<%= project.project_id %>/unvolunteer" method="POST">
+                        <button type="button" id="unvolunteer-trigger" class="btn btn-danger">
+                            ❌ Cancel Volunteer Registration
+                        </button>
+                    </form>
+                <% } else { %>
+                    <form action="/project/<%= project.project_id %>/volunteer" method="POST">
+                        <button type="submit" class="btn btn-primary">
+                            ✋ Sign Up to Volunteer
+                        </button>
+                    </form>
+                <% } %>
+            <% } else { %>
+                <p><a href="/login">Log in</a> to sign up as a volunteer for this project!</p>
+            <% } %>
+        </div>
+
+    </div>
+</main>
+
+<!-- Cancel Volunteer Confirmation Modal -->
+<% if (typeof user !== 'undefined' && user && typeof isVolunteering !== 'undefined' && isVolunteering) { %>
+    <div id="cancel-volunteer-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <h3>Confirm Cancellation</h3>
+            <p>Are you sure you want to cancel your volunteer registration?</p>
+            <div class="modal-actions">
+                <button type="button" id="cancel-unvolunteer" class="btn btn-secondary">Keep Registration</button>
+                <button type="button" id="confirm-unvolunteer" class="btn btn-danger">Yes, Cancel</button>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<!-- Link to external modal JavaScript file -->
+<script src="/js/modals.js"></script>
+
+<%- include('partials/footer') %>

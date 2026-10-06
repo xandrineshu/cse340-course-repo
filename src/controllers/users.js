@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
+import { getProjectsByVolunteer } from '../models/volunteers.js';
 
 // Middleware to protect routes that require authentication
 const requireLogin = (req, res, next) => {
@@ -44,14 +45,22 @@ const showUsersList = async (req, res) => {
 };
 
 // Controller to render the Dashboard page
-const showDashboard = (req, res) => {
-    const user = req.session.user;
-    res.render('dashboard', {
-        title: 'Dashboard',
-        name: user.name,
-        email: user.email,
-        role_name: user.role_name // Pass role_name to EJS
-    });
+const showDashboard = async (req, res, next) => {
+    try {
+        const user = req.session.user;
+        const volunteeredProjects = await getProjectsByVolunteer(user.user_id);
+
+        res.render('dashboard', {
+            title: 'Dashboard',
+            name: user.name,
+            email: user.email,
+            role_name: user.role_name, // Pass role_name to EJS
+            volunteeredProjects: volunteeredProjects || []
+        });
+    } catch (error) {
+        console.error('Error loading dashboard:', error);
+        next(error);
+    }
 };
 
 const showUserRegistrationForm = (req, res) => {

@@ -1,24 +1,92 @@
 <%- include('partials/header') %>
 
-<main class="dashboard-page">
-    <h1><%= title %></h1>
+    <main class="dashboard-page">
+        <h1 class="dashboard-title">
+            <%= title %>
+        </h1>
 
-    <div class="dashboard-card">
-        <h2>My Profile 👤</h2>
-        <div class="dashboard-details">
-            <p><strong>🏷️ Name:</strong> <%= name %></p>
-            <p><strong>📧 Email:</strong> <%= email %></p>
+        <!-- Side-by-Side Grid Container -->
+        <div class="dashboard-grid">
 
-            <% if (role_name === 'admin') { %>
-                <div class="admin-tools-row">
-                    <p><strong>🛠️ Admin Tools:</strong></p>
-                    <div class="admin-actions">
-                        <a href="/users" class="btn btn-primary">Manage Registered Users</a>
-                    </div>
+            <!-- Left Column: Profile -->
+            <div class="dashboard-card">
+                <h2>My Profile 👤</h2>
+                <div class="dashboard-details">
+                    <p><strong>🏷️ Name:</strong>
+                        <%= name %>
+                    </p>
+                    <p><strong>📧 Email:</strong>
+                        <%= email %>
+                    </p>
+
+                    <% if (role_name==='admin' ) { %>
+                        <div class="admin-tools-row">
+                            <p><strong>🛠️ Admin Tools:</strong></p>
+                            <div class="admin-actions">
+                                <a href="/users" class="btn btn-primary">Manage Registered Users</a>
+                            </div>
+                        </div>
+                        <% } %>
                 </div>
-            <% } %>
-        </div>        
-    </div>
-</main>
+            </div>
 
-<%- include('partials/footer') %>
+            <!-- Right Column: Volunteered Projects -->
+            <div class="dashboard-card">
+                <h2>My Volunteered Projects ✋</h2>
+
+                <% if (typeof volunteeredProjects !=='undefined' && volunteeredProjects && volunteeredProjects.length>
+                    0) { %>
+                    <ul class="volunteered-projects-list">
+                        <% volunteeredProjects.forEach(function(project) { %>
+                            <li class="volunteered-project-item">
+                                <div class="project-info">
+                                    <h3>
+                                        <a href="/project/<%= project.project_id %>">
+                                            <%= project.title %>
+                                        </a>
+                                    </h3>
+                                    <p>
+                                        📅 <%= project.project_date ? new
+                                            Date(project.project_date).toLocaleDateString() : 'TBD' %>
+                                            <% if (project.organization_name) { %>
+                                                <br>🏛️ <%= project.organization_name %>
+                                                    <% } %>
+                                    </p>
+                                </div>
+                                <div class="project-action">
+                                    <!-- Removed onsubmit and added unvolunteer-trigger class + type="button" -->
+                                    <form action="/project/<%= project.project_id %>/unvolunteer" method="POST">
+                                        <button type="button" class="btn btn-danger unvolunteer-trigger">
+                                            Cancel
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } else { %>
+                        <p class="no-projects-text">You haven't signed up for any volunteer projects yet.</p>
+                        <div class="browse-projects-wrapper">
+                            <a href="/projects" class="btn btn-primary">Browse Projects</a>
+                        </div>
+                        <% } %>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Cancel Volunteer Confirmation Modal Overlay -->
+    <div id="cancel-volunteer-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Cancel Volunteer Registration?</h3>
+            <p>Are you sure you want to cancel your volunteer registration for this project?</p>
+            <div class="modal-actions">
+                <button type="button" id="cancel-unvolunteer" class="btn btn-secondary">Keep Registration</button>
+                <button type="button" id="confirm-unvolunteer" class="btn btn-danger">Yes, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/modals.js"></script>
+
+    <%- include('partials/footer') %>

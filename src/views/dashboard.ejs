@@ -9,33 +9,48 @@
         <div class="dashboard-grid">
 
             <!-- Left Column: Profile -->
-            <div class="dashboard-card">
-                <h2>My Profile 👤</h2>
+            <div class="dashboard-card profile-card-container">
+                <div class="profile-header-center">
+                    <div class="avatar-circle">
+                        <% if (role_name==='admin' ) { %>
+                            <img src="/images/admin_profile.png" alt="Admin Profile" class="profile-avatar-img">
+                        <% } else { %>
+                            <img src="/images/user_profile.png" alt="User Profile" class="profile-avatar-img">
+                        <% } %>
+                    </div>
+                    <h2>My Profile 👤</h2>
+                </div>
+
                 <div class="dashboard-details">
-                    <p><strong>🏷️ Name:</strong>
-                        <%= name %>
+                    <p class="profile-name-row">
+                        <strong>🏷️ Name:</strong>
+                        <span><%= name %></span>
                     </p>
                     <p><strong>📧 Email:</strong>
                         <%= email %>
                     </p>
 
-                    <% if (role_name==='admin' ) { %>
+                    <% if (role_name === 'admin') { %>
                         <div class="admin-tools-row">
                             <p><strong>🛠️ Admin Tools:</strong></p>
                             <div class="admin-actions">
                                 <a href="/users" class="btn btn-primary">Manage Registered Users</a>
                             </div>
                         </div>
-                        <% } %>
+                    <% } %>
                 </div>
             </div>
 
             <!-- Right Column: Volunteered Projects -->
-            <div class="dashboard-card">
+            <div class="dashboard-card volunteered-projects">
                 <h2>My Volunteered Projects ✋</h2>
 
-                <% if (typeof volunteeredProjects !=='undefined' && volunteeredProjects && volunteeredProjects.length>
-                    0) { %>
+                <% if (typeof volunteeredProjects !=='undefined' && volunteeredProjects && volunteeredProjects.length> 0) { %>
+                    <!-- Activity Counter Summary -->
+                    <p class="volunteer-summary-text">
+                        You are currently registered for <strong><%= projectCount %></strong> project(s).
+                    </p>
+
                     <ul class="volunteered-projects-list">
                         <% volunteeredProjects.forEach(function(project) { %>
                             <li class="volunteered-project-item">
@@ -49,7 +64,7 @@
                                         📅 <%= project.project_date ? new
                                             Date(project.project_date).toLocaleDateString() : 'TBD' %>
                                             <% if (project.organization_name) { %>
-                                                <br>🏛️ <%= project.organization_name %>
+                                                <br>🏛️️ <%= project.organization_name %>
                                                     <% } %>
                                     </p>
                                 </div>

@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import pool from '../models/db.js';
 import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
 import { getProjectsByVolunteer } from '../models/volunteers.js';
 
@@ -50,12 +51,16 @@ const showDashboard = async (req, res, next) => {
         const user = req.session.user;
         const volunteeredProjects = await getProjectsByVolunteer(user.user_id);
 
+        // 1. Calculate the project count here!
+        const projectCount = volunteeredProjects ? volunteeredProjects.length : 0;
+
         res.render('dashboard', {
             title: 'Dashboard',
             name: user.name,
             email: user.email,
             role_name: user.role_name, // Pass role_name to EJS
-            volunteeredProjects: volunteeredProjects || []
+            volunteeredProjects: volunteeredProjects || [],
+            projectCount // Pass the count to your view
         });
     } catch (error) {
         console.error('Error loading dashboard:', error);
@@ -128,6 +133,50 @@ const processLogout = async (req, res) => {
     res.redirect('/login');
 };
 
+// NEW: Show specific user profile and their volunteered projects
+const showUserDetails = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+
+        // 1. Fetch user details and their role name
+        const userQuery = `
+            SELECT u.user_id, u.name, u.email, u.created_at, r.role_name 
+            FROM users u
+            JOIN roles r ON u.role_id = r.role_id
+            WHERE u.user_id = $1;
+        `;
+        const userResult = await pool.query(userQuery, [userId]);
+
+        if (userResult.rows.length === 0) {
+            return res.status(404).render('404', { message: 'User not found' });
+        }
+
+        const user = userResult.rows[0];
+
+        // 2. Fetch projects this user has volunteered for
+        const projectsQuery = `
+            SELECT p.project_id, p.title, p.description, p.location, p.project_date, o.name AS organization_name
+            FROM project_volunteers pv
+            JOIN project p ON pv.project_id = p.project_id
+            JOIN organization o ON p.organization_id = o.organization_id
+            WHERE pv.user_id = $1;
+        `;
+        const projectsResult = await pool.query(projectsQuery, [userId]);
+        const volunteeredProjects = projectsResult.rows;
+
+        // 3. Render the detail view
+        res.render('user', {
+            user,
+            volunteeredProjects,
+            title: `User Details - ${user.name}`
+        });
+
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+};
+
 export {
     requireLogin,
     showDashboard,
@@ -137,5 +186,6 @@ export {
     processLoginForm,
     processLogout,
     requireRole,
-    showUsersList
+    showUsersList,
+    showUserDetails
 };

@@ -42,7 +42,8 @@ import {
     requireLogin,
     requireRole,
     showDashboard,
-    showUsersList
+    showUsersList,
+    showUserDetails
 } from './controllers/users.js';
 
 import {
@@ -77,6 +78,9 @@ router.get('/dashboard', requireLogin, showDashboard);
 
 // Protected Admin Users List Route
 router.get('/users', requireLogin, requireRole('admin'), showUsersList);
+
+// NEW: Admin view for a specific user's details and volunteered projects
+router.get('/admin/users/:id', requireLogin, requireRole('admin'), showUserDetails);
 
 
 // ==========================================

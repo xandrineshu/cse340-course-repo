@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<main class="dashboard-page">
+    <h1>User Details</h1>
+
+    <div class="admin-dashboard-card">
+        <div class="profile-details-header">
+            <div class="avatar-circle">
+                <% if (user.role_name==='admin' ) { %>
+                    <img src="/images/admin_profile.png" alt="Admin Profile" class="profile-avatar-img">
+                <% } else { %>
+                    <img src="/images/user_profile.png" alt="User Profile" class="profile-avatar-img">
+                <% } %>
+            </div>
+            <h2><%= user.name %></h2>
+            <p><%= user.email %></p>
+            <span class="role-badge"><%= user.role_name %></span>
+        </div>
+
+        <div class="admin-dashboard-details">
+            <h3>Volunteered Projects ✋</h3>
+            <% if (volunteeredProjects && volunteeredProjects.length > 0) { %>
+                <ul class="volunteered-projects-list">
+                    <% volunteeredProjects.forEach(project => { %>
+                        <li class="volunteered-project-item">
+                            <div class="project-info">
+                                <h3><%= project.title %></h3>
+                                <p><strong>🏛️ Organization:</strong> <%= project.organization_name %></p>
+                                <p><strong>📍 Location:</strong> <%= project.location %></p>
+                                <p><strong>📅 Date:</strong> <%= new Date(project.project_date).toLocaleDateString() %></p>
+                            </div>
+                            <!-- Optional link to view the project itself -->
+                            <a href="/project/<%= project.project_id %>" class="btn btn-secondary">View Project</a>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>This user hasn't volunteered for any projects yet.</p>
+            <% } %>
+        </div>
+
+        <div class="admin-back-link">
+            <a href="/users" class="btn btn-secondary">← Back to Users List</a>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

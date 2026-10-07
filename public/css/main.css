@@ -869,7 +869,6 @@ main ul.org-projects-list li.org-project-item {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    box-shadow: none;
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -1959,7 +1958,7 @@ table.users-table tbody tr:hover {
         align-items: center;
         justify-content: center;
         padding: 0.35rem 0.75rem;
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: 600;
         text-decoration: none;
         border-radius: 5px;
@@ -2157,7 +2156,7 @@ table.users-table tbody tr:hover {
 /* --------------------------------------------------------------------------
    12.3. Tablet Only Layout (751px to 1020px)
    -------------------------------------------------------------------------- */
-@media only screen and (min-width: 751px) and (max-width: 1020px) {
+@media only screen and (min-width: 701px) and (max-width: 1020px) {
 
     main,
     main.category-details-page,
@@ -2364,9 +2363,9 @@ table.users-table tbody tr:hover {
         grid-template-columns: 80%;
         justify-content: center;
     }
-    
+
     .admin-dashboard-card .volunteered-projects-list li.volunteered-project-item {
-        width: 100%; 
+        width: 100%;
         margin: 0;
     }
 
@@ -2376,7 +2375,7 @@ table.users-table tbody tr:hover {
         justify-content: space-between;
         align-items: center;
     }
-    
+
     .admin-dashboard-card .volunteered-project-item a.btn-secondary {
         font-size: 0.9rem;
         align-self: center;
@@ -2385,9 +2384,13 @@ table.users-table tbody tr:hover {
 }
 
 /* --------------------------------------------------------------------------
-   12.4. Mobile Only Layout (Up to 750px)
-   -------------------------------------------------------------------------- */
-@media only screen and (max-width: 750px) {
+   12.4. Mobile Only Layout (Up to 700px)
+  -------------------------------------------------------------------------- */
+@media only screen and (max-width: 700px) {
+
+    /* ==========================================================================
+       1. General Layout & Typography
+       ========================================================================== */
     main {
         padding: 1.5rem 1rem;
         display: flex;
@@ -2396,11 +2399,41 @@ table.users-table tbody tr:hover {
     }
 
     h1 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
         margin-bottom: 1.5rem;
         text-align: center;
     }
 
+    main p {
+        font-size: 0.9rem;
+        padding-inline: 1rem;
+    }
+
+    main form {
+        padding: 1.5rem;
+        width: 85%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .register-form {
+        margin-bottom: 2rem;
+    }
+
+    .modal-card {
+        width: 85%;
+        padding: 1.5rem 1.5rem;
+        border-radius: 10px;
+    }
+
+    main ul li img {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* ==========================================================================
+       2. Home Page
+       ========================================================================== */
     .hero-title,
     .hero-subtitle {
         padding-inline: 2rem;
@@ -2425,24 +2458,250 @@ table.users-table tbody tr:hover {
         width: 65%;
     }
 
-    main form {
-        padding: 1.5rem;
+    /* ==========================================================================
+       3. Organization Page
+       ========================================================================== */
+    .organizations-list {
         width: 85%;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5rem;
         box-sizing: border-box;
+        margin-top: -2rem;
     }
 
-    .register-form {
+    .organizations-list li img {
+        width: 35%;
+    }
+
+    main ul.organizations-list li a.org-name-link {
+        font-size: 1rem;
+    }
+
+    ul.organizations-list li span.org-email {
+        font-size: 0.75rem;
+    }
+
+    .org-card {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .org-card img.org-logo {
+        max-width: 140px;
+        margin: 0 auto;
+    }
+
+    .org-card-content {
+        align-items: center;
+    }
+
+    .org-card-content h2 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .org-card-content p {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .org-projects-list {
         margin-bottom: 2rem;
     }
 
-    .project-card-container,
+    main ul.org-projects-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        width: 85%;
+        padding: 0;
+        list-style: none;
+    }
+
+    main ul.org-projects-list li.org-project-item {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    main.org-details-page ul.org-projects-list li.org-project-item a {
+        font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       4. Projects Page
+      -------------------------------------------------------------------------- */
+    .project-card-container {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem;
+        box-sizing: border-box;
+        margin-bottom: 2rem;
+    }
+
+    .project-card-container h2 {
+        font-size: 1rem;
+    }
+
+    .project-card-container .project-description-box {
+        padding-inline: 0.5rem;
+        padding-block: 0.7rem;
+    }
+
+    .project-description-box p {
+        font-size: 0.7rem;
+    }
+
+    ul.upcoming-projects-list {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        margin-top: -2rem;
+    }
+
+    ul.upcoming-projects-list li.upcoming-project-card {
+        width: 100%;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    li.upcoming-project-card h3 {
+        font-size: 0.9rem;
+    }
+
+    li.upcoming-project-card p {
+        font-size: 0.7em;
+    }
+
+    .project-card h3 {
+        font-size: 0.8rem;
+    }
+
+    .project-card p.location,
+    .project-card p.date {
+        margin-left: -1rem;
+        text-align: left;
+        font-size: 0.7rem;
+    }
+
+    .project-categories {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .project-categories .info-label,
+    .project-details-page .project-categories .tags-container a.category-tag {
+        font-size: 0.7rem;
+    }
+
+    .project-categories:has(.tags-container > :nth-child(3)) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .project-info-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.85rem;
+        margin-top: 1rem;
+        box-sizing: border-box;
+        align-items: stretch;
+    }
+
+    .project-info-grid .info-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .project-info-grid .info-item .info-label,
+    .project-info-grid .info-item .info-value {
+        font-size: 0.7rem;
+    }
+
+    .project-info-grid .project-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .project-info-grid .project-actions .btn {
+        width: 85%;
+        max-width: 250px;
+        text-align: center;
+        box-sizing: border-box;
+        font-size: 0.75rem;
+        padding: 0.5rem;
+        margin: 0 auto;
+    }
+
+    .volunteer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        gap: 1em;
+    }
+
+    .volunteer-section h3 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .volunteer-section p {
+        font-size: 0.7rem;
+        text-align: center;
+        margin: 0;
+    }
+
+    .project-details-page .volunteer-section form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        margin: 0.5rem auto 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .project-details-page .volunteer-section .btn-danger {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.75rem;
+        width: 85%;
+        max-width: 250px;
+        white-space: normal;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    /* ==========================================================================
+       5. Categories Page
+       ========================================================================== */
     .category-details-card,
-    .org-card,
-    .organizations-list,
-    ul.upcoming-projects-list,
-    main ul.categories-list,
-    .category-projects-section {
+    .category-projects-section,
+    main ul.categories-list {
         width: 85%;
         margin-left: auto;
         margin-right: auto;
@@ -2450,28 +2709,25 @@ table.users-table tbody tr:hover {
         box-sizing: border-box;
     }
 
-    .organizations-list,
-    ul.upcoming-projects-list {
-        margin-top: -2rem;
+    .category-details-card {
+        margin-bottom: 2rem;
     }
 
     .category-projects-section {
         padding: 0;
     }
 
-    .org-projects-list,
-    .project-card-container {
-        margin-bottom: 2rem;
+    .category-details-page .category-projects-section h3 {
+        font-size: 1rem;
+        text-align: center;
     }
 
-    .project-card-container {
-        padding: 2rem;
+    .category-details-page .category-project-item .project-info a.project-title-link {
+        font-size: 0.8rem;
     }
 
-    ul.upcoming-projects-list li.upcoming-project-card {
-        width: 100%;
-        padding: 1.5rem;
-        box-sizing: border-box;
+    .project-info .project-meta span {
+        font-size: 0.6rem;
     }
 
     main ul.categories-list {
@@ -2487,18 +2743,11 @@ table.users-table tbody tr:hover {
         box-sizing: border-box;
     }
 
-    main ul li:not(.project-card):not(.category-card):not(.upcoming-project-card),
-    main ul.organizations-list li,
-    main ul.category-projects-list li.category-project-item {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
     main ul.categories-list .category-card ul.projects-list {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 0.75rem;
-        width: 100%;
+        width: 90%;
         padding: 0;
         margin: 1rem 0 0 0;
         box-sizing: border-box;
@@ -2509,95 +2758,21 @@ table.users-table tbody tr:hover {
         box-sizing: border-box;
     }
 
-    main ul li img {
-        width: 100%;
-        max-width: 100%;
-    }
-
     main ul.category-projects-list li.category-project-item {
         padding: 1rem;
-    }
-
-    .project-info-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.85rem;
-        width: 100%;
-        margin-top: 1rem;
-        box-sizing: border-box;
-    }
-
-    .project-info-grid .info-item {
         width: 100%;
         box-sizing: border-box;
     }
 
-    .project-info-grid .project-actions,
-    .project-info-grid .info-item.full-width {
-        grid-column: 1 / -1;
+    main ul li:not(.project-card):not(.category-card):not(.upcoming-project-card),
+    main ul.organizations-list li {
         width: 100%;
-    }
-
-    main ul.org-projects-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        width: 85%;
-        padding: 0;
-        list-style: none;
-    }
-
-    main ul.org-projects-list li.org-project-item {
-        width: 100%;
-        padding: 1rem;
         box-sizing: border-box;
     }
 
-    .org-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-
-    .org-card img.org-logo {
-        max-width: 140px;
-        margin: 0 auto;
-    }
-
-    .org-card-content {
-        align-items: center;
-    }
-
-    .org-card-content h2,
-    .org-card-content p {
-        text-align: center;
-    }
-
-    .project-card h3 {
-        font-size: 0.8rem;
-    }
-
-    .project-card p.location,
-    .project-card p.date {
-        text-align: left;
-        font-size: 0.7rem;
-    }
-
-    .project-categories {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-
-    .project-categories:has(.tags-container > :nth-child(3)) {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
+    /* ==========================================================================
+       6. Dashboard & User Management Page
+       ========================================================================== */
     .dashboard-grid {
         flex-direction: column;
         gap: 2rem;
@@ -2606,8 +2781,14 @@ table.users-table tbody tr:hover {
         margin: 0 auto;
     }
 
-    .dashboard-card {
-        width: 85%;
+    .profile-header-center h2,
+    .dashboard-card.volunteered-projects h2 {
+        font-size: 1rem;
+    }
+
+    .dashboard-details p {
+        padding-inline: 0;
+        font-size: 0.7rem;
     }
 
     .dashboard-card.volunteered-projects {
@@ -2624,62 +2805,14 @@ table.users-table tbody tr:hover {
         text-align: center;
     }
 
-    .modal-card {
-        width: 85%;
-        padding: 1.5rem 1.5rem;
-        border-radius: 10px;
-    }
-
-    main.users-container {
-        width: 85%;
-        padding: 1rem 0;
-        overflow-x: auto;
-    }
-
-    table.users-table {
-        min-width: 500px;
-    }
-
-    table.users-table th,
-    table.users-table td {
-        padding: 0.75rem 0.85rem;
-        font-size: 0.85rem;
-    }
-
-    .role-badge {
-        padding: 0.25rem 0.6rem;
-        font-size: 0.75rem;
-    }
-
-    .volunteer-section h3 {
-        font-size: 1rem;
-    }
-
-    .volunteer-section p {
-        font-size: 0.8rem;
-        text-align: right;
-    }
-
     .volunteer-summary-text {
+        font-size: 0.7rem;
         text-align: center;
     }
 
-    .admin-tools-row {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0.75rem;
-        flex-wrap: nowrap;
-    }
-
-    .admin-tools-row p {
-        margin-bottom: 0;
-        white-space: nowrap;
-    }
-
     .admin-tools-row .btn {
+        font-size: 0.6rem;
         margin: 0;
-        white-space: nowrap;
     }
 
     .admin-dashboard-card {
@@ -2695,12 +2828,87 @@ table.users-table tbody tr:hover {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-         align-items: center;
+        align-items: center;
     }
-    
-    .admin-dashboard-card .volunteered-project-item a.btn-secondary {
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-info {
+        width: 100%;
+    }
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-action,
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-action form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-action button {
+        width: 85%;
+        max-width: 250px; 
+        padding-inline: 1rem;
+        margin: 0 auto;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-info h3 {
+        line-height: 1.1;
+        margin-bottom: 0.3rem;
+        text-align: center;
+    }
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-info h3 a {
         font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .dashboard-page .dashboard-card.volunteered-projects ul.volunteered-projects-list li.volunteered-project-item .project-info p {
+        font-size: 0.7rem;
+        text-align: center;
+        padding-inline: 0;
+    }
+
+    .admin-dashboard-card .volunteered-project-item a.btn-secondary {
+        font-size: 0.6rem;
         align-self: center;
         margin-left: 3rem;
+    }
+
+    main.users-container {
+        width: 95%;
+        /* Adjusts width to fit nicely within mobile margins */
+        padding: 0.5rem 0;
+        overflow-x: visible;
+        /* Prevents awkward horizontal clipping */
+    }
+
+    .users-container h1 {
+        margin-top: 2rem;
+        margin-bottom: 0;
+    }
+
+    table.users-table {
+        width: 100%;
+        min-width: unset;
+        table-layout: auto;
+    }
+
+    table.users-table th,
+    table.users-table td {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.6rem;
+        word-break: break-word;
+    }
+
+    .role-badge {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.5rem;
     }
 }
